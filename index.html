@@ -1,0 +1,1348 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>VHSL Cheer Stunt & Pyramid Difficulty Calculator</title>
+
+
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!--                                                                                    BEGIN CSS STYLING                                                                                   -->
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+<!-- ======================== 💅 GENERAL STYLING 💅 ======================== -->
+<style>
+:root {
+  --vhsl-blue: #2F317D;
+  --vhsl-blue-dark: #232567;
+  --vhsl-red: #c02025;
+  --vhsl-red-dark: #9f171c;
+  --vhsl-yellow: #F8DF00;
+  --page-bg: #f4f6fb;
+  --card-bg: #ffffff;
+  --text-main: #1f2937;
+  --text-muted: #5f6472;
+  --border-soft: #e4e7f0;
+  --shadow-soft: 0 10px 28px rgba(31, 41, 55, 0.08);
+  --shadow-hover: 0 14px 36px rgba(31, 41, 55, 0.12);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; font-family: 'Inter', Arial, sans-serif; color: var(--text-main); line-height: 1.45; background:   radial-gradient(circle at top left, rgba(47,49,125,0.10), transparent 34%),
+    linear-gradient(180deg, #f8f9fd 0%, var(--page-bg) 38%, #eef1f8 100%);}
+body > .center-text,
+body > .section-card,
+body > #SummaryWrapper,
+body > div[style*="text-align: center; margin-top: 30px"] { width: min(1120px, calc(100% - 32px)); margin-left: auto !important; margin-right: auto !important;}
+.center-text { text-align: center; }
+.modern-hero { width: min(1120px, calc(100% - 32px)); margin: 28px auto 24px auto; padding: 30px 28px; text-align: center; background: rgba(255,255,255,0.88); border: 1px solid rgba(47,49,125,0.10);
+  border-radius: 26px; box-shadow: var(--shadow-soft); backdrop-filter: blur(10px);}
+.modern-hero img { width: 78%; max-width: 280px; height: auto; margin-bottom: 10px;}
+.modern-hero h1 { margin: 0; color: var(--vhsl-blue); font-size: clamp(30px, 4vw, 46px); line-height: 1.05; font-weight: 800; letter-spacing: -0.03em;}
+.modern-hero p { margin: 10px 0 0 0; color: var(--text-muted); font-size: 16px; font-weight: 500;}
+h1, h2, h3 { letter-spacing: -0.02em; }
+h1 { color: var(--vhsl-blue); font-size: clamp(30px, 4vw, 46px); font-weight: 800; }
+h2 { color: var(--vhsl-blue); font-size: clamp(22px, 2.3vw, 30px); margin: 0 0 10px 0; font-weight: 800; }
+hr { width: min(1120px, calc(100% - 32px)); height: 1px; border: none; background: linear-gradient(90deg, transparent, rgba(47,49,125,0.25), transparent); margin: 28px auto;}
+a { color: var(--vhsl-blue); font-weight: 700; text-decoration: underline; text-underline-offset: 3px;}
+a:hover { color: var(--vhsl-red); }
+.section-card { max-width: 1120px; margin: 34px auto; padding: clamp(22px, 3vw, 34px); background: var(--card-bg); border: 1px solid rgba(31,41,55,0.07); border-radius: 24px;
+  box-shadow: var(--shadow-soft); transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;}
+.section-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); border-color: rgba(47,49,125,0.18);}
+.section-card .center-text p { color: var(--text-muted); margin: 8px 0; }
+.highlight-bar { display: inline-block; padding: 10px 16px; color: #1f2937; background: linear-gradient(135deg, var(--vhsl-yellow), #ffe86b); border-radius: 999px; font-weight: 800;
+  box-shadow: 0 5px 14px rgba(248,223,0,0.26);}
+label { display: block; margin-top: 18px; margin-bottom: 4px; color: #273043; font-size: 14px; font-weight: 700;}
+input, select, textarea { width: 100%; max-width: 660px; padding: 12px 13px; margin-top: 6px; color: var(--text-main); background: #ffffff; border: 1px solid #d5dae7;
+  border-radius: 12px; font: inherit; box-shadow: 0 1px 2px rgba(0,0,0,0.03); transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;}
+input:focus, select:focus, textarea:focus { border-color: var(--vhsl-blue); outline: none; box-shadow: 0 0 0 4px rgba(47,49,125,0.11);}
+textarea { line-height: 1.45; font-family: inherit; }
+input::placeholder, textarea::placeholder { font-style: italic; color: #a4abb9; white-space: pre-line; }
+input.completed, select.completed, textarea.completed {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="%2300A000" viewBox="0 0 16 16"><path d="M6.003 11.803L2.2 8l1.4-1.4 2.4 2.4 5.4-5.4L12.8 5l-6.8 6.8z"/></svg>');
+  background-repeat: no-repeat;  background-position: right 10px center;  background-size: 18px;  padding-right: 35px;}
+button { margin-top: 22px; padding: 12px 20px; color: #ffffff; background: var(--vhsl-blue); border: none; border-radius: 12px; font-family: inherit; font-weight: 800;
+  cursor: pointer; box-shadow: 0 8px 18px rgba(47,49,125,0.20); transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;}
+button:hover { background: var(--vhsl-blue-dark); transform: translateY(-1px); box-shadow: 0 10px 22px rgba(47,49,125,0.26);}
+.reset-button { background: var(--vhsl-red) !important; box-shadow: 0 8px 18px rgba(192,32,37,0.20) !important; }
+.reset-button:hover { background: var(--vhsl-red-dark) !important; }
+#previewBtn { background: #4b5563 !important; }
+#previewBtn:hover { background: #374151 !important; }
+#saveBtn { padding: 16px 30px !important; font-size: 20px !important; border-radius: 16px !important; }
+</style>
+
+
+<!-- =================== 🏋️ STUNT & PYRAMID RUBRIC 🏋️ =================== -->
+<style>
+/* Wrappers */
+.wrapper { width: fit-content; max-width: 100%; margin: 0 auto 40px auto; position: relative; overflow-x: auto; padding: 6px; border-radius: 18px; cursor: pointer;}
+.wrapper img { display: block; max-width: 100%; height: auto; }
+.svg-wrapper { width: 100%; max-width: 1000px; margin: 0 auto; display: block; }
+.svg-wrapper svg { width: 100%; height: auto; display: block; }
+
+/* Tables and calculated-result output */
+table { width: 100%; max-width: 980px; margin-top: 14px; background: #ffffff; border: 1px solid var(--border-soft); border-collapse: separate; 
+	border-spacing: 0; border-radius: 16px;  overflow: hidden;}
+th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border-soft);}
+th { background: #f5f7fc; color: #34405a; font-size: 13px; font-weight: 800; }
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: rgba(47,49,125,0.035); }
+#skillCountsTable th:nth-child(3), #skillCountsTable td:nth-child(3),
+#PyramidCountsTable th:nth-child(3), #PyramidCountsTable td:nth-child(3) { width: 80px; min-width: 80px; max-width: 80px; text-align: center;}
+#skillCounts input, #PyramidCounts input { width: 72px; padding: 8px; text-align: center; }
+.drag-handle { cursor: grab; font-size: 15px; }
+.delete-btn { cursor: pointer; color: #d00; font-size: 18px; text-align: center; }
+.majority td { background-color: rgba(34,197,94,0.3) !important; }
+.non-majority td, .additional-toss td { background-color: rgba(239,68,68,0.3) !important; }
+#output, #outputp, #StuntSkills, #StuntRange, #PyramidSkills, #PyramidRange { max-width: 900px; margin-top: 20px; padding: 16px; white-space: pre-wrap; color: #263044;
+  background: #f7f8fc; border: 1px solid var(--border-soft); border-radius: 14px;}
+.text-underline { color: var(--vhsl-red); text-decoration: underline; }
+.note-small { color: #6b7280; font-size: 12px; line-height: 1.35; font-style: italic; margin-top: 26px; }
+.icon { font-size: 24px; vertical-align: middle; }
+
+/* Responsive Inline SVG for Stunt & Pyramid */
+.svg-highlight { fill: none; stroke: none; outline: none; pointer-events: all; cursor: pointer; }
+.svg-highlight.inversion, .svg-highlight.release, .svg-highlight.twisting, .svg-highlight.coed, .svg-highlight.other, .svg-highlight.toss { stroke: none; fill: none; }
+.svg-flash.inversion { stroke: rgba(180,0,180,0.85); fill: rgba(180,0,180,0.18); stroke-width: 3; }
+.svg-flash.release   { stroke: rgba(0,180,0,0.85);   fill: rgba(0,180,0,0.18);   stroke-width: 3; }
+.svg-flash.twisting  { stroke: rgba(255,0,0,0.85);   fill: rgba(255,0,0,0.18);   stroke-width: 3; }
+.svg-flash.coed      { stroke: rgba(0,0,255,0.85);   fill: rgba(0,0,255,0.12);   stroke-width: 3; }
+.svg-flash.other     { stroke: rgba(150,100,50,0.9); fill: rgba(190,150,90,0.35); stroke-width: 3; }
+.svg-flash.toss      { stroke: rgba(255,120,0,0.85); fill: rgba(255,120,0,0.12); stroke-width: 3; }
+.svg-highlight.fadeout { fill: none !important; stroke: none !important; }
+</style>
+
+<!-- =================== 🤩 EXTRA VISUAL ADD-ONS 🤩 =================== -->
+<style>
+/* === 🔍 INFO BOX POP UP 🔍 === */  
+.info-icon { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; margin-left: 6px; color: var(--vhsl-blue); background: rgba(47,49,125,0.08);
+  border-radius: 999px; font-size: 16px; cursor: pointer;}
+.info-icon:hover { color: var(--vhsl-red); background: rgba(192,32,37,0.10); }
+.info-icon:active::after { content: attr(data-tooltip); }
+.info-popup { display: none; position: fixed; top: 50%; left: 50%; z-index: 10000; max-width: 400px; padding: 20px 25px; text-align: center; background: white; border-radius: 20px;
+  box-shadow: 0 22px 60px rgba(0,0,0,0.28); transform: translate(-50%, -50%);}
+.info-popup a { color: var(--vhsl-blue); text-decoration: underline; }
+
+/* === ⚠ ALERT MESSAGES ⚠ === */  
+#customAlert { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.5); z-index: 9999;}
+#customAlertContent { max-width: 400px; padding: 20px 25px; text-align: center; background: #fff; border-radius: 20px; box-shadow: 0 22px 60px rgba(0,0,0,0.28);}
+#customAlertContent button { margin-top: 15px; padding: 8px 16px; }
+#customAlertText { white-space: pre-line; }
+#previewModal > div { border-radius: 20px !important; box-shadow: 0 22px 60px rgba(0,0,0,0.28) !important; }
+
+</style>
+
+
+<!-- =================== 📱 STYLING ADJUSTMENTS FOR MOBILE DEVICES 	📱 =================== -->
+<style>
+/* === 	☀ REGULAR LIGHT VISUALS ☀ == */
+@media (max-width: 760px) {
+  body > .center-text,  body > .section-card,  body > #SummaryWrapper,  body > div[style*="text-align: center; margin-top: 30px"],
+  .modern-hero { width: min(100% - 20px, 1120px); }
+  .section-card { padding: 20px; border-radius: 18px; }
+  .modern-hero { padding: 22px 16px; border-radius: 20px; }
+  .modern-hero img { max-width: 230px; }
+  button { width: 100%; }
+  div[style*="display: flex; align-items: center; gap: 10px"] { flex-direction: column; align-items: stretch !important; }
+  table { font-size: 13px; }
+	}
+
+/* === 	🌑 DARK MODE VISUALS 🌑 == */
+@media (prefers-color-scheme: dark) {
+  body { color: #e5e7eb; background:  radial-gradient(circle at top left, rgba(248,223,0,0.08), transparent 32%), linear-gradient(180deg, #10131c 0%, #151821 100%);  }
+  .modern-hero, .section-card { color: #f3f4f6;  background: #111827; border-color: rgba(148,163,184,0.22); box-shadow: 0 8px 22px rgba(0,0,0,0.5);  }
+  h1, h2, h3, .modern-hero h1 { color: #ffffff; }
+  .modern-hero p, .section-card .center-text p, .note-small { color: #cbd5e1; }
+  a { color: #facc15; }
+  a:hover { color: #ffffff; }
+  label { color: #e5e7eb; }
+  input, select, textarea {color: #e5e7eb; background: #0f172a; border-color: #334155; }
+  input:focus, select:focus, textarea:focus { border-color: #60a5fa; box-shadow: 0 0 0 4px rgba(96,165,250,0.18); }
+  table { color: #e5e7eb; background: #111827; border-color: #374151; }
+  th { color: #f3f4f6; background: #1f2937; }
+  td, th { border-color: #374151; }
+  tbody tr:hover { background: rgba(255,255,255,0.05); }
+  .majority td { background-color: rgba(34,197,94,0.18) !important; color: #f3f4f6; }
+  .non-majority td, .additional-toss td { background-color: rgba(239,68,68,0.18) !important; color: #f3f4f6; }
+  #output, #outputp, #StuntSkills, #StuntRange, #PyramidSkills, #PyramidRange {color: #f3f4f6; background: #1f2937;  border-color: #374151; }
+  #customAlertContent, .info-popup, #previewModal > div {  color: #f3f4f6 !important; background: #1f2937 !important; border: 1px solid #374151 !important; }
+  .highlight-bar { color: #111827; }
+  .info-icon { color: #facc15; background: rgba(250,204,21,0.12); }
+  button { background: #3b82f6; }
+  button:hover { background: #2563eb; }
+  .reset-button { background: var(--vhsl-red) !important; }
+/*SVG Adustments with glow for dark mode
+  .svg-flash.inversion { filter: drop-shadow(0 0 8px rgba(236,72,153,0.9)); }
+  .svg-flash.release { filter: drop-shadow(0 0 8px rgba(34,197,94,0.9)); }
+  .svg-flash.twisting { filter: drop-shadow(0 0 8px rgba(248,113,113,0.9)); }
+  .svg-flash.coed { filter: drop-shadow(0 0 8px rgba(96,165,250,0.9)); }
+  .svg-flash.other { filter: drop-shadow(0 0 8px rgba(217,119,6,0.9)); }
+  .svg-flash.toss { filter: drop-shadow(0 0 8px rgba(251,146,60,0.9)); }
+}
+</style>
+
+<!-- =================== 🪲 DEBUG MODE 🪲 =================== -->
+<style>
+ (Comment this whole block out when not in use)
+/*
+  .svg-highlight.inversion {  stroke: rgba(180,0,180,0.85) !important;  fill: rgba(180,0,180,0.18) !important;  stroke-width: 3px !important;}
+  .svg-highlight.release {  stroke: rgba(0,180,0,0.85) !important;  fill: rgba(0,180,0,0.18) !important;  stroke-width: 3px !important;}
+  .svg-highlight.twisting {  stroke: rgba(255,0,0,0.85) !important;  fill: rgba(255,0,0,0.18) !important;  stroke-width: 3px !important;}
+  .svg-highlight.coed {  stroke: rgba(0,0,255,0.85) !important;  fill: rgba(0,0,255,0.12) !important;  stroke-width: 3px !important;}
+  .svg-flash.other {  stroke: rgba(150,100,50,0.9)  !important; fill: rgba(190,150,90,0.35) !important;  stroke-width: 3px !important;}
+  .svg-highlight.toss {  stroke: rgba(255,120,0,0.85) !important;  fill: rgba(255,120,0,0.12) !important;  stroke-width: 3px !important;}
+*/
+</style>
+
+
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!--                                                                                     END CSS STYLING                                                                                    -->
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+</head>
+<body>
+
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!--                                                                                  BEGIN HTML INTERFACE                                                                                  -->
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+	<div class="modern-hero">
+		<img src="vhsl logo 2.png" alt="VHSL Logo" style="max-width: 325px; height: auto;">
+		<h1 style="margin-bottom: 5px;">VHSL CHEER</h1>
+        <h1 style="margin-top: 0;">Stunt & Pyramid Difficulty Range Calculator</h1><br>
+
+		<p><strong><span class="text-underline">THIS IS NOT THE FORM TO SUBMIT A RUBRIC FOR AN EVENT. </span>
+		<br> To submit a rubric, click
+			<a href="https://thenvcoa.github.io/VHSL-Cheer-Rubric/" target="_blank" rel="noopener noreferrer"> here</a>.</strong></p> 
+
+		<p>
+			For additional resources, visit the
+		<a href="https://www.vhsl.org/competition-cheer/" target="_blank" rel="noopener noreferrer">VHSL Cheer Website</a>.
+		</p>
+	</div>
+<hr>
+	<div class="modern-hero">
+		<label class="inline">Number of Athletes Performing:  <input type="number" id="numAthletes" min="1"></label>
+  
+	</div>
+<hr>
+
+<!-- ========================== 🏋 INTERACTIVE STUNT RUBRIC 🏋 ========================== -->
+
+<div class="section-card" data-section="Stunts">
+<div class="center-text">  
+  <h2>Stunt Skills Rubric 
+  <span class="info-icon" onclick="showInfo('majorityInfo')">ⓘ</span>
+  </h2>
+
+  <p><strong>Click on the rubric image to select skills.</strong></p>
+ 
+</div>
+	
+  <div class="wrapper svg-wrapper" aria-label="Stunt Rubric (interactive)">
+  <!-- Outer SVG (viewBox matches the original SVG canvas: 0 0 928 705) -->
+  <svg id="StuntRubricSVG" viewBox="0 0 928 705" preserveAspectRatio="xMidYMid meet" role="img" aria-label="VHSL Stunt Rubric">
+    <!-- Use your uploaded SVG file as the background image inside the inline SVG -->
+    <!-- Keep the filename exactly as you host it. If you inlined the whole SVG body instead, remove this <image> line. -->
+    <image href="Stunt Rubric 2026.svg" x="0" y="0" width="928" height="705" preserveAspectRatio="xMidYMid meet" />
+
+	<!--  🚨🛑🚧🚨🛑🚧🚨🛑🚧🚨🛑🚧🚨🛑🚧🚨🛑🚧🚨🛑🚧🚨🛑🚧🚨🛑🚧🚨🛑🚧🚨🛑🚧🚨🛑🚧 	       -->
+	<!--  04/27/26 - ALTERNATIVE: HOST IMAGE DIRECTLY FROM PNG TO AVOID MAPPING TO SVG. All click box functionality remains the same.   -->
+	<!--  <image href="Stunt Rubric 2026 DRAFT.png" x="0" y="0" width="928" height="705" preserveAspectRatio="xMidYMid meet" />   -->
+
+    <!-- Responsive region overlays.
+         Coordinates are percentages (x, y, width, height) so they scale with the SVG.
+         IDs match original HTML so your JS mapping still applies.
+         These rects were computed from your PNG coords and corrected for the SVG's internal translate.
+    -->
+
+    <!-- Inversions -->
+    <rect id="i1" class="svg-highlight inversion" x="7.25%" y="18.5%" width="17.75%" height="3%"></rect>
+    <rect id="i2" class="svg-highlight inversion" x="7.25%" y="21.25%" width="17.75%" height="3.5%"></rect>
+    <rect id="i3" class="svg-highlight inversion" x="7.25%" y="24.75%" width="17.75%" height="3%"></rect>
+    <rect id="i4" class="svg-highlight inversion" x="25.25%" y="18.5%" width="17.5%" height="3%"></rect>
+	<rect id="i5" class="svg-highlight inversion" x="25.25%" y="21.25%" width="17.5%" height="3.5%"></rect>
+	<rect id="i6" class="svg-highlight inversion" x="25.25%" y="24.75%" width="17.5%" height="3%"></rect>
+	<rect id="i7" class="svg-highlight inversion" x="42.75%" y="18.5%" width="18.25%" height="3%"></rect>
+	<rect id="i8" class="svg-highlight inversion" x="42.75%" y="24.75%" width="18.25%" height="3%"></rect>
+	
+	<rect id="i9" class="svg-highlight inversion" x="61%" y="18.5%" width="18.5%" height="3%"></rect>
+	<rect id="i10" class="svg-highlight inversion" x="61%" y="24.75%" width="18.5%" height="3%"></rect>
+	<rect id="i11" class="svg-highlight inversion" x="61%" y="27.75%" width="18.5%" height="3%"></rect>
+	<rect id="i12" class="svg-highlight inversion" x="79.75%" y="24.75%" width="18.25%" height="3%"></rect>
+	<rect id="i13" class="svg-highlight inversion" x="79.75%" y="27.75%" width="18.25%" height="3%"></rect>
+
+    <!-- Releases -->
+    <rect id="r1" class="svg-highlight release" x="7.25%" y="32%" width="17.75%" height="2.5%"></rect>
+    <rect id="r2" class="svg-highlight release" x="7.25%" y="34.5%" width="17.75%" height="2%"></rect>
+    <rect id="r3" class="svg-highlight release" x="7.25%" y="36.5%" width="17.75%" height="2.5%"></rect>
+
+    <!-- Twisting -->
+    <rect id="t1" class="svg-highlight twisting" x="7.25%" y="52.5%" width="17.75%" height="2%"></rect>
+    <rect id="t2" class="svg-highlight twisting" x="7.25%" y="54.75%" width="17.75%" height="2%"></rect>
+    <rect id="t3" class="svg-highlight twisting" x="7.25%" y="57%" width="17.75%" height="2.5%"></rect>
+
+    <!-- Coed -->
+    <rect id="c1" class="svg-highlight coed" x="7.25%" y="65%" width="17.75%" height="2.25%"></rect>
+    <rect id="c2" class="svg-highlight coed" x="7.25%" y="71.5%" width="17.75%" height="2.5%"></rect>
+    <rect id="c3" class="svg-highlight coed" x="7.25%" y="74%" width="17.75%" height="2.5%"></rect>
+
+    <!-- Other -->
+    <rect id="o1" class="svg-highlight other" x="7.25%" y="84.25%" width="17.75%" height="2.75%"></rect>
+    <rect id="o2" class="svg-highlight other" x="25.25%" y="84.25%" width="17.5%" height="2.75%"></rect>
+	
+	 <!-- Toss -->
+    <rect id="o3" class="svg-highlight toss" x="7.25%" y="88.25%" width="17.75%" height="4%"></rect>
+	<rect id="o4" class="svg-highlight toss" x="25.25%" y="88.25%" width="17.5%" height="4%"></rect>
+	<rect id="o5" class="svg-highlight toss" x="42.75%" y="88.25%" width="18.25%" height="4%"></rect>
+	<rect id="o6" class="svg-highlight toss" x="61.25%" y="88.25%" width="18.25%" height="4%"></rect>
+	<rect id="o7" class="svg-highlight toss" x="79.75%" y="88.25%" width="18.5%" height="4%"></rect>
+
+    <!-- Bottom header/test boxes -->
+    <rect id="h1" class="svg-highlight inversion" x="20%" y="80%" width="20%" height="3%"></rect>
+    <rect id="h2" class="svg-highlight release"   x="45%" y="80%" width="20%" height="3%"></rect>
+    <rect id="h3" class="svg-highlight twisting"  x="70%" y="80%" width="20%" height="3%"></rect>
+  </svg>
+  </div>
+	
+	<p><strong>Enter the number of stunt groups for each skill:</strong></p>
+
+	<!-- Drag & drop table -->
+	<table id="skillCountsTable">
+		<thead>
+		<tr>
+			<th>Skill</th>
+			<th>Difficulty</th>
+			<th># of Stunt Groups</th>
+			<th style="width:30px;">🗑️</th>
+		</tr>
+		</thead>
+		<tbody id="skillCounts"></tbody>
+	</table>
+
+	<div style="display: flex; align-items: center; gap: 10px;">
+	<button onclick="runChecker()">Calculate Stunt Difficulty Range</button>
+    <span class="note-small">
+        Majority skills will highlight in green and non-majority skills will highlight in red.
+    </span>
+	</div>
+
+	<div id="output"></div>
+</div>
+
+<hr>
+<!-- ========================== 🏋 INTERACTIVE PYRAMID RUBRIC 🏋 ========================== -->
+
+<div class="section-card" data-section="Pyramid">
+ <div class="center-text">
+  <h2>Pyramid Skills Rubric
+  <span class="info-icon" onclick="showInfo('majorityInfo')">ⓘ</span>
+  </h2>
+  <p><strong>Click on the rubric image to select skills.</strong></p>
+</div>
+
+  <!-- ======= RESPONSIVE INLINE SVG: PYRAMID RUBRIC ======= -->
+  <div class="wrapper svg-wrapper" aria-label="Pyramid Rubric (interactive)">
+  <svg id="PyramidRubricSVG" viewBox="0 0 1174 643" preserveAspectRatio="xMidYMid meet" role="img" aria-label="VHSL Pyramid Rubric">
+    <!-- Use your uploaded SVG file as the background image inside the inline SVG -->
+    <!-- Keep the filename exactly as you host it. If you inlined the whole SVG body instead, remove this <image> line. -->
+    <image href="Pyramid Rubric 2026.svg" x="0" y="0" width="1174" height="643" preserveAspectRatio="xMidYMid meet" />
+
+	<!--  🚨🛑🚧🚨🛑🚧🚨🛑🚧🚨🛑🚧🚨🛑🚧🚨🛑🚧🚨🛑🚧🚨🛑🚧🚨🛑🚧🚨🛑🚧🚨🛑🚧🚨🛑🚧 	       -->
+	<!--  04/27/26 - ALTERNATIVE: HOST IMAGE DIRECTLY FROM PNG TO AVOID MAPPING TO SVG. All click box functionality remains the same.   -->
+	<!-- <image href="Pyramid Rubric 2026 DRAFT.png" x="0" y="0" width="1174" height="643" preserveAspectRatio="xMidYMid meet" />     -->
+
+    <!-- Highlight regions (same pattern as Stunt) -->
+    <rect id="n1" class="svg-highlight inversion"  x="18.5%" y="16.75%" width="15%" height="5%"></rect>
+    <rect id="n2" class="svg-highlight inversion"  x="18.5%" y="21.75%" width="15%" height="6.25%"></rect>
+    <rect id="n3" class="svg-highlight inversion"  x="18.5%" y="33.75%" width="15%" height="5.25%"></rect>
+    <rect id="n4" class="svg-highlight inversion"  x="33.5%" y="16.75%" width="15.25%" height="5%"></rect>
+
+    <rect id="pr1" class="svg-highlight release"    x="18.5%" y="47.25%" width="15%" height="6.5%"></rect>
+    <rect id="pr2" class="svg-highlight release"    x="18.5%" y="53.75%" width="15%" height="6.5%"></rect>
+    <rect id="pr3" class="svg-highlight release"    x="33.75%" y="47.25%" width="15%" height="6.5%"></rect>
+
+    <rect id="b1" class="svg-highlight twisting"   x="18.5%" y="74.75%" width="15%" height="4.5%"></rect>
+    <rect id="b2" class="svg-highlight twisting"   x="18.5%" y="79.5%" width="15%" height="6.25%"></rect>
+    <rect id="b3" class="svg-highlight twisting"   x="18.5%" y="85.75%" width="15%" height="8.5%"></rect>
+
+  </svg>
+  </div>
+
+	<p><strong>Enter the number of skill flyers for each skill:</strong></p>
+
+	<!-- Drag & drop table -->
+	<table id="PyramidCountsTable">
+		<thead>
+		<tr>
+			<th>Skill</th>
+			<th>Difficulty</th>
+			<th># of Skill Flyers</th>
+			<th style="width:30px;">🗑️</th>
+		</tr>
+		</thead>
+		<tbody id="PyramidCounts"></tbody>
+	</table>
+
+	<div style="display: flex; align-items: center; gap: 10px;">
+	<button onclick="runChecker2()">Calculate Pyramid Difficulty Range</button>
+	<span class="note-small">
+		Majority skills will highlight in green and non-majority skills will highlight in red.
+	</span>
+	</div>
+
+	<div id="outputp"></div>
+  </div>
+
+  <div style="text-align: center; margin-top: 30px;">
+  	<br>
+	<br>
+	<button id="resetBtn" class="reset-button" onclick="localStorage.removeItem('rubricFormAutosave'); location.reload();">Clear  |  Reset </button>
+    <button id="previewBtn" style="background:#555;">Preview  |  Print</button>
+  </div>
+
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!--                                                                                   END HTML INTERFACE                                                                                   -->
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+<script>
+
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!--                                                                                     BEGIN JAVASCRIPT                                                                                   -->
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+/********* 🔍 SHOW INFO ⓘ POP UP 🔍 *********/
+
+function showInfo(id) {  document.getElementById(id).style.display = "block";}
+function closeInfo(id) {  document.getElementById(id).style.display = "none";}
+
+/************************************************ 
+ |                                               |
+          🏋️ STUNT & PYRAMID RUBRIC 🏋️            
+ |                                               |
+************************************************/
+
+
+//Labels for all stunt & pyramid skills
+const StuntRegions = [
+  { id: 'i1', skill: 'Non-Release Inversions - Prep Level and Below to Below Prep', category: 'Inversion', difficulty: 'Beginner'},
+  { id: 'i2', skill: 'Below Prep Level Inversions to Ground', category: 'Inversion', difficulty: 'Beginner' },
+  { id: 'i3', skill: 'Released Inversion Prep Level or Below to Below Prep', category: 'Inversion', difficulty: 'Beginner' },
+  { id: 'i4', skill: 'Non-Release Inversions - Prep Level and Below to Prep', category: 'Inversion', difficulty: 'Intermediate' },
+  { id: 'i5', skill: 'Suspended Forward Roll Variations & Inversions', category: 'Inversion', difficulty: 'Intermediate' },  
+  { id: 'i6', skill: 'Released Inversions Prep Level or Below to Prep', category: 'Inversion', difficulty: 'Intermediate' },
+  { id: 'i7', skill: 'Non-Release Inversions Prep Level and Below to Extended', category: 'Inversion', difficulty: 'Advanced' },
+  { id: 'i8', skill: 'Released Inversions Prep Level or Below to Extended', category: 'Inversion', difficulty: 'Advanced' },
+  { id: 'i9', skill: 'Non-Release Twisting Inversions Prep Level and Below to Extended', category: 'Inversion', difficulty: 'Elite' },
+  { id: 'i10', skill: 'Released Inversions Prep Level or Below to Extended IBP', category: 'Inversion', difficulty: 'Elite' },
+  { id: 'i11', skill: 'Alternate Entries to Hand to Hand Stunts', category: 'Inversion', difficulty: 'Elite' },
+  { id: 'i12', skill: 'Released Inversions Prep Level or Below to Extended ABP', category: 'Inversion', difficulty: 'Super Elite' },
+  { id: 'i13', skill: 'Twisting Released Inversion to Extended', category: 'Inversion', difficulty: 'Super Elite' },
+  
+  { id: 'r1', skill: 'Release to Below Prep', category: 'Release', difficulty: 'Beginner' },
+  { id: 'r2', skill: 'Horizontal Releases to Below Prep', category: 'Release', difficulty: 'Beginner' },
+  { id: 'r3', skill: 'Extended Release to Below Prep', category: 'Release', difficulty: 'Beginner' },
+  
+  { id: 't1', skill: '1/4 or 1/2 Up to Prep Level', category: 'Twisting', difficulty: 'Beginner' },
+  { id: 't2', skill: '1/4 Up to Extended', category: 'Twisting', difficulty: 'Beginner' },
+  { id: 't3', skill: '1/4 or 1/2 Twisting Transitions', category: 'Twisting', difficulty: 'Beginner' },
+  
+  { id: 'c1', skill: 'Single Base at Prep Level', category: 'Coed', difficulty: 'Beginner' },
+  { id: 'c2', skill: 'Assisted Coed Skills to Prep', category: 'Coed', difficulty: 'Beginner' },
+  { id: 'c3', skill: 'Assisted Walk-In/Toss to Chair', category: 'Coed', difficulty: 'Beginner' },
+  
+  { id: 'o1', skill: 'Prep Level and Below Stunts Not Previously Categorized', category: 'Other', difficulty: 'Beginner' },
+  { id: 'o2', skill: 'Extended Stunts Not Previously Categorized', category: 'Other', difficulty: 'Intermediate' },
+
+  { id: 'o3', skill: 'Straight Ride or Pretty Girl Tosses', category: 'Toss', difficulty: 'Beginner' },
+  { id: 'o4', skill: 'Single Skill Tosses', category: 'Toss', difficulty: 'Intermediate' },
+  { id: 'o5', skill: 'Multi-Skill Tosses', category: 'Toss', difficulty: 'Advanced' },
+  { id: 'o6', skill: 'Single-Skill Tosses with Full Twist', category: 'Toss', difficulty: 'Elite' }, 
+  { id: 'o7', skill: 'Multi-Skill Tosses with Full Twist', category: 'Toss', difficulty: 'Super Elite' },
+  
+  { id: 'h1', skill: 'TEST', category: 'Inversion', difficulty: 'Advanced' },
+  { id: 'h2', skill: 'TEST', category: 'Release', difficulty: 'Elite' },
+  { id: 'h3', skill: 'TEST', category: 'Twisting', difficulty: 'Super Elite' }
+];
+
+const PyramidRegions = [
+  { id: 'n1', skill: 'Braced Non-Released Transitions', category: 'Inversion', difficulty: 'Beginner' },
+  { id: 'n2', skill: 'Inverted Stunts to Prep Level and Below', category: 'Inversion', difficulty: 'Beginner' },
+  { id: 'n3', skill: 'Intermediate Twisting Stunt Variations', category: 'Inversion', difficulty: 'Beginner' },
+  { id: 'n4', skill: 'Unbraced Non-Released Transitions', category: 'Inversion', difficulty: 'Intermediate' },
+
+  { id: 'pr1', skill: 'Braced Release to Prep or Below (1 or 2)', category: 'Release', difficulty: 'Beginner' },
+  { id: 'pr2', skill: 'Braced Release to Extended (2)', category: 'Release', difficulty: 'Beginner' },
+  { id: 'pr3', skill: 'Braced Release to Extended (1)', category: 'Release', difficulty: 'Intermediate' },
+ 
+  { id: 'b1', skill: 'Rolling Transition to Prep Level or Below', category: 'Twisting', difficulty: 'Advanced' },
+  { id: 'b2', skill: 'Flipping Transition Landing Below Prep Level (1 or 2)', category: 'Twisting', difficulty: 'Elite' },
+  { id: 'b3', skill: '1/4 Twisting Flipping Transition Landing at Prep or Below (1 or 2)', category: 'Twisting', difficulty: 'Super Elite' },
+];
+
+const wrapper = document.querySelector('.wrapper');
+const skillCountsContainer = document.getElementById('skillCounts');
+
+const pyramidWrapper = document.getElementById('PyramidRubricSVG').closest('.wrapper');
+const pyramidCountsContainer = document.getElementById('PyramidCounts');
+
+
+// ⌨⌨ CLICK HANDLER FOR STUNTS
+  (function() {
+  
+    const fallbackRegions = [
+      { id: 'i1', skill: 'Connected Inversions - Prep Level and Below to Below Prep', category: 'Inversion', difficulty: 'Beginner'},
+      { id: 'i2', skill: 'Below Prep Level Inversions to Ground', category: 'Inversion', difficulty: 'Beginner' },
+      { id: 'i3', skill: 'Released Inversion Prep Level or Below to Below Prep', category: 'Inversion', difficulty: 'Beginner' },
+      { id: 'i4', skill: 'Connected Inversions - Prep Level and Below to Prep', category: 'Inversion', difficulty: 'Intermediate' },
+      { id: 'r1', skill: 'Release to Below Prep', category: 'Release', difficulty: 'Beginner' },
+      { id: 'r2', skill: 'Horizontal Releases to Below Prep', category: 'Release', difficulty: 'Beginner' },
+      { id: 'r3', skill: 'Extended Release to Below Prep', category: 'Release', difficulty: 'Beginner' },
+      { id: 't1', skill: '1/4 or 1/2 Up to Prep Level', category: 'Twisting', difficulty: 'Beginner' },
+      { id: 't2', skill: '1/4 Up to Extended', category: 'Twisting', difficulty: 'Beginner' },
+      { id: 't3', skill: '1/4 or 1/2 Twisting Transitions', category: 'Twisting', difficulty: 'Beginner' },
+      { id: 'c1', skill: 'Single Base at Prep Level', category: 'Coed', difficulty: 'Beginner' },
+      { id: 'c2', skill: 'Assisted Coed Skills to Prep', category: 'Coed', difficulty: 'Beginner' },
+      { id: 'c3', skill: 'Assisted Walk-In/Toss to Chair', category: 'Coed', difficulty: 'Beginner' },
+      { id: 'o1', skill: 'Prep Level and Below Stunts Not Previously Categorized', category: 'Other', difficulty: 'Beginner' },
+      { id: 'o2', skill: 'Extended Stunts Not Previously Categorized', category: 'Other', difficulty: 'Intermediate' }, 
+	  { id: 'o3', skill: 'Straight Ride or Pretty Girl Tosses', category: 'Toss', difficulty: 'Beginner' },
+      { id: 'h1', skill: 'TEST', category: 'Inversion', difficulty: 'Advanced' },
+      { id: 'h2', skill: 'TEST', category: 'Release', difficulty: 'Elite' },
+      { id: 'h3', skill: 'TEST', category: 'Twisting', difficulty: 'Super Elite' }
+    ];
+
+  // If StuntRegions[] exists, use it. Otherwise fallback.
+    const Regions = (typeof StuntRegions !== 'undefined' && Array.isArray(StuntRegions)) ? StuntRegions : fallbackRegions;
+
+    function getRegionById(id) {
+      return Regions.find(r => r.id === id) || { id: id, skill: id, difficulty: '' };
+    }
+
+    const svg = document.getElementById('StuntRubricSVG');
+    if (!svg) return;
+
+    const skillCountsContainer = document.getElementById('skillCounts');
+
+    // ---- 🖇 ADD ROW TO STUNT TABLE 🖇 ----
+    function addRowForRegion(region) {
+      const skillId = 'count_' + region.id;
+      // create new row
+      const row = document.createElement('tr');
+      row.id = skillId + '_' + Date.now();
+      row.draggable = true;
+      row.innerHTML = `
+        <td class="drag-handle">${region.skill}</td>
+        <td>${region.difficulty}</td>
+        <td><input type="number" id="${skillId}" min="0" value="0"></td>
+        <td class="delete-btn">🗑️</td>
+      `;
+      skillCountsContainer.appendChild(row);
+
+      // ---- 🗑 DELETE BUTTON 🗑 ----
+      row.querySelector('.delete-btn').addEventListener('click', () => {
+        if (row.parentElement) row.parentElement.removeChild(row);
+      });
+
+      // ---- 🖱 DRAG & DROP FUNCTIONALITY 🖱 ----
+      row.addEventListener('dragstart', e => {
+        e.dataTransfer.effectAllowed = 'move';
+        window.__draggedRow = row;
+      });
+    }
+
+    // ---- 📸 FLASH EFFECT 📸 ----
+    function flashRect(rectEl) {
+      rectEl.classList.add('svg-flash');
+      setTimeout(() => rectEl.classList.add('fadeout'), 220);
+      setTimeout(() => {
+        rectEl.classList.remove('svg-flash', 'fadeout');
+      }, 520);
+    }
+
+    // ---- ⌨ CLICK & KEYBOARD EVENTS ⌨ ----
+    Regions.forEach(r => {
+      try {
+        const el = document.getElementById(r.id);
+        if (!el) return;
+        el.addEventListener('click', (ev) => {
+          flashRect(el);
+          addRowForRegion(r);
+          ev.stopPropagation();
+        });
+   
+        el.setAttribute('tabindex', '0');
+        el.addEventListener('keydown', (ev) => {
+          if (ev.key === 'Enter' || ev.key === ' ') {
+            ev.preventDefault();
+            el.click();
+          }
+        });
+      } catch (err) {
+        // continue if one region fails
+        console.warn('SVG region attach error for', r.id, err);
+      }
+    });
+  })();
+
+
+
+
+// 📊📊 DRAG–DROP FOR STUNT TABLE
+let draggedRow = null;
+
+	skillCountsContainer.addEventListener('dragstart', e => {
+	draggedRow = e.target.closest('tr');
+	if (draggedRow) e.dataTransfer.effectAllowed = 'move';
+	});
+
+	skillCountsContainer.addEventListener('dragover', e => {
+	e.preventDefault();
+	const targetRow = e.target.closest('tr');
+	if (!targetRow || targetRow === draggedRow) return;
+
+	const rect = targetRow.getBoundingClientRect();
+	const next = (e.clientY - rect.top) > rect.height / 2;
+	skillCountsContainer.insertBefore(draggedRow, next ? targetRow.nextSibling : targetRow);
+	});
+
+	skillCountsContainer.addEventListener('drop', e => {
+	e.preventDefault();
+	draggedRow = null;
+	});
+
+// ⌨⌨ CLICK HANDLER FOR PYRAMID RUBRIC
+(function () {
+
+  const fallbackPyramidRegions = [
+    { id: "n1",  skill: "Braced non-released transitions", category: "Non-Released Transition", difficulty: "Beginner" },
+    { id: "n2",  skill: "Inverted stunts to prep level and below", category: "Non-Released Transition", difficulty: "Beginner" },
+    { id: "n3",  skill: "Intermediate twisting stunt variations", category: "Non-Released Transition", difficulty: "Beginner" },
+    { id: "n4",  skill: "Unbraced non-released transitions", category: "Non-Released Transition", difficulty: "Intermediate" },
+
+    { id: "pr1", skill: "Braced release to prep or below", category: "Released Transition", difficulty: "Beginner" },
+    { id: "pr2", skill: "Braced release to extended (2)", category: "Released Transition", difficulty: "Beginner" },
+    { id: "pr3", skill: "Braced release to extended (1)", category: "Released Transition", difficulty: "Intermediate" },
+
+    { id: 'b1', skill: 'Rolling Transition to Prep Level or Below', category: 'Twisting', difficulty: 'Advanced' },
+    { id: 'b2', skill: 'Flipping Transition Landing Below Prep Level (1 or 2)', category: 'Twisting', difficulty: 'Elite' },
+    { id: 'b3', skill: '1/4 Twisting Flipping Transition Landing at Prep or Below (1 or 2)', category: 'Twisting', difficulty: 'Super Elite' }
+  ];
+
+  // If PyramidRegions[] exists, use it. Otherwise fallback.
+  const Regions = (typeof PyramidRegions !== "undefined" && Array.isArray(PyramidRegions))
+    ? PyramidRegions
+    : fallbackPyramidRegions;
+
+  const svg = document.getElementById("PyramidRubricSVG");
+  if (!svg) return;
+
+  const pyramidCountsContainer = document.getElementById("PyramidCounts");
+
+  // ---- 📸 FLASH EFFECT 📸 ----
+  function flashRect(rectEl) {
+    rectEl.classList.add("svg-flash");
+    setTimeout(() => rectEl.classList.add("fadeout"), 220);
+    setTimeout(() => {
+      rectEl.classList.remove("svg-flash", "fadeout");
+    }, 520);
+  }
+
+  // ---- 🖇 ADD ROW TO PYRAMID TABLE 🖇 ----
+  function addPyramidRow(region) {
+    const skillId = "pcount_" + region.id;
+
+    const row = document.createElement("tr");
+    row.id = skillId + "_" + Date.now();
+    row.draggable = true;
+
+    row.innerHTML = `
+      <td class="drag-handle">${region.skill}</td>
+      <td>${region.difficulty}</td>
+      <td><input type="number" id="${skillId}" min="0" value="0"></td>
+      <td class="delete-btn">🗑️</td>
+    `;
+
+    pyramidCountsContainer.appendChild(row);
+
+    // ---- 🗑 DELETE BUTTON 🗑 ----
+    row.querySelector(".delete-btn").addEventListener("click", () => {
+      row.remove();
+    });
+
+    // ---- 🖱 DRAG & DROP FUNCTIONALITY 🖱 ----
+    row.addEventListener("dragstart", (ev) => {
+      ev.dataTransfer.effectAllowed = "move";
+      window.__draggedPyramidRow = row;
+    });
+  }
+
+   // ---- ⌨ CLICK & KEYBOARD EVENTS ⌨ ----
+  Regions.forEach(region => {
+    const rect = document.getElementById(region.id);
+    if (!rect) return;
+
+    rect.style.cursor = "pointer";
+    rect.setAttribute("tabindex", "0");
+
+    rect.addEventListener("click", (ev) => {
+      flashRect(rect);
+      addPyramidRow(region);
+      ev.stopPropagation();
+    });
+
+    rect.addEventListener("keydown", (ev) => {
+      if (ev.key === "Enter" || ev.key === " ") {
+        ev.preventDefault();
+        rect.click();
+      }
+    });
+  });
+
+})();
+
+
+// 📊📊 DRAG–DROP FOR PYRAMID TABLE
+let draggedPyramidRow = null;
+
+	pyramidCountsContainer.addEventListener('dragstart', e => {
+	draggedPyramidRow = e.target.closest('tr');
+	if (draggedPyramidRow) e.dataTransfer.effectAllowed = 'move';
+	});
+
+	pyramidCountsContainer.addEventListener('dragover', e => {
+	e.preventDefault();
+	const targetRow = e.target.closest('tr');
+	if (!targetRow || targetRow === draggedPyramidRow) return;
+	
+	const rect = targetRow.getBoundingClientRect();
+	const next = (e.clientY - rect.top) > rect.height / 2;
+	pyramidCountsContainer.insertBefore(draggedPyramidRow, next ? targetRow.nextSibling : targetRow);
+	});
+
+	pyramidCountsContainer.addEventListener('drop', e => {
+	e.preventDefault();
+	draggedPyramidRow = null;
+	});
+
+// 🧠🧠 DIFFICULTY CHECKER FOR STUNTS
+function runChecker(silent = false) {
+  const numAthletes = parseInt(document.getElementById('numAthletes').value) || 0;
+  const majorityStunt = numAthletes <= 15 ? 2 : 3;
+
+  const rows = document.querySelectorAll('#skillCounts tr');
+  let majoritySkills = [];
+  let outputText = '<strong>Selected Stunt Skills:\n\n</strong>';
+
+  const difficultyLevels = {
+    'Beginner': 1,
+    'Intermediate': 2,
+    'Advanced': 3,
+    'Elite': 4,
+    'Super Elite': 5
+  };
+
+  // Lookup table so we can tell which rows are Toss skills
+  const stuntSkillLookup = {};
+  StuntRegions.forEach(region => {
+    stuntSkillLookup[region.skill] = region;
+  });
+
+  // 🔶Step 1: Reset row coloring
+  rows.forEach(row => {
+    row.classList.remove('majority', 'non-majority', 'additional-toss');
+  });
+
+  // 🔶Step 2: Find all toss rows that meet majority
+  const qualifyingTossRows = [];
+
+  rows.forEach((row, index) => {
+    const skill = row.cells[0].textContent.trim();
+    const difficulty = row.cells[1].textContent.trim();
+    const count = parseInt(row.cells[2].querySelector('input').value) || 0;
+    const region = stuntSkillLookup[skill];
+
+    if (region && region.category === 'Toss' && count >= majorityStunt) {
+      qualifyingTossRows.push({
+        row,
+        index,
+        skill,
+        difficulty,
+        count,
+        level: difficultyLevels[difficulty] || 0
+      });
+    }
+  });
+
+  // 🔶Step 3: Only one toss may count — pick the highest difficulty toss
+  // If tied, keep the first one listed in order of performance
+  qualifyingTossRows.sort((a, b) => {
+    if (b.level !== a.level) return b.level - a.level;
+    return a.index - b.index;
+  });
+
+  const countedTossRow = qualifyingTossRows.length > 0 ? qualifyingTossRows[0].row : null;
+  const additionalTosses = qualifyingTossRows.slice(1);
+
+  // 🔶Step 4: Classify each row
+  rows.forEach(row => {
+    const skill = row.cells[0].textContent.trim();
+    const difficulty = row.cells[1].textContent.trim();
+    const count = parseInt(row.cells[2].querySelector('input').value) || 0;
+    const region = stuntSkillLookup[skill];
+    const isToss = region && region.category === 'Toss';
+
+    if (isToss && count >= majorityStunt) {
+      if (row === countedTossRow) {
+        majoritySkills.push({ skill, difficulty });
+        row.classList.add('majority');
+        outputText += `${count} — ${difficulty} — ${skill}\n`;
+      } else {
+        row.classList.add('additional-toss');
+        outputText += `${count} — ${difficulty} — ${skill} (Additional Toss)\n`;
+      }
+    } else if (count >= majorityStunt) {
+      majoritySkills.push({ skill, difficulty });
+      row.classList.add('majority');
+      outputText += `${count} — ${difficulty} — ${skill}\n`;
+    } else {
+      row.classList.add('non-majority');
+      outputText += `${count} — ${difficulty} — ${skill} (Non Majority)\n`;
+    }
+  });
+
+  // 🔶Step 5: Count majority skills by difficulty
+  const difficultyCount = {};
+  majoritySkills.forEach(s => {
+    difficultyCount[s.difficulty] = (difficultyCount[s.difficulty] || 0) + 1;
+  });
+
+  // 🔶Step 6: Sort difficulties high to low
+  const sortedDifficulties = Object.keys(difficultyLevels).sort(
+    (a, b) => difficultyLevels[b] - difficultyLevels[a]
+  );
+
+  // 🔶Step 7: Determine overall stunt difficulty
+  let overallStuntDifficulty = null;
+  const startingIndex = sortedDifficulties.findIndex(d => difficultyCount[d] >= 1);
+
+  if (startingIndex !== -1) {
+    let cumulative = 0;
+    for (let i = startingIndex; i < sortedDifficulties.length; i++) {
+      cumulative += (difficultyCount[sortedDifficulties[i]] || 0);
+      if (cumulative >= 2) {
+        overallStuntDifficulty = sortedDifficulties[i];
+        break;
+      }
+    }
+  }
+
+  // 🔶Step 8: Add note if extra tosses were excluded
+  if (additionalTosses.length > 0) {
+    const keptToss = qualifyingTossRows[0];
+    outputText += `\n<strong>Note:</strong><span style="color:#C62828;"> Only one toss by majority may count toward difficulty range.</span> `;
+    outputText += `The highest qualifying toss counted was: ${keptToss.skill}\n`;
+    }
+
+  // 🔶Step 9: Output results
+  outputText += `<strong>\nRequired Number of Groups for Majority:</strong> ${majorityStunt}`;
+  outputText += `<strong>\nStunt Difficulty Range:</strong> ${overallStuntDifficulty || 'Selected skills do not meet rubric requirements for majority'}`;
+
+  document.getElementById('output').innerHTML = outputText;
+
+  // 🔶Step 10: Summary output
+  let StuntSkillListOutput = '';
+  rows.forEach(row => {
+    const skill = row.cells[0].textContent.trim();
+    const difficulty = row.cells[1].textContent.trim();
+    const count = parseInt(row.cells[2].querySelector('input').value) || 0;
+
+    StuntSkillListOutput += `${count} — ${difficulty} — ${skill}`;
+
+    if (row.classList.contains('additional-toss')) {
+      StuntSkillListOutput += ' (Additional Toss)';
+    } else if (row.classList.contains('non-majority')) {
+      StuntSkillListOutput += ' (Non Majority)';
+    }
+
+    StuntSkillListOutput += '\n';
+  });
+
+  const stuntSkillsEl = document.getElementById('StuntSkills');
+  const stuntRangeEl = document.getElementById('StuntRange');
+
+  if (stuntSkillsEl) stuntSkillsEl.textContent = StuntSkillListOutput;
+  if (stuntRangeEl) stuntRangeEl.textContent = overallStuntDifficulty || 'Rubric Requirements Not Met';
+}
+
+
+
+// 🧠🧠 DIFFICULTY CHECKER FOR PYRAMID
+function runChecker2() {
+  const numAthletes = parseInt(document.getElementById('numAthletes').value) || 0;
+  const majorityPyramid = numAthletes <= 15 ? 1 : 2;
+
+  const rows = document.querySelectorAll('#PyramidCounts tr');
+  let majoritySkills = [];
+  let outputText = '<strong>Selected Pyramid Skills:\n\n</strong>';
+
+  // 🔷Step 1: Reset table coloring
+  rows.forEach(row => row.classList.remove('majority', 'non-majority'));
+
+  // 🔷Step 2: Label Non-Majority Skills and gather majority skills
+  rows.forEach(row => {
+    const skill = row.cells[0].textContent;
+    const difficulty = row.cells[1].textContent;
+    const count = parseInt(row.cells[2].querySelector('input').value) || 0;
+
+    if (count >= majorityPyramid) {
+      majoritySkills.push({ skill, difficulty });
+      row.classList.add('majority');
+      outputText += `${count} — ${difficulty} — ${skill}\n`;
+    } else {
+      row.classList.add('non-majority');
+      outputText += `${count} — ${difficulty} — ${skill} (Non Majority)\n`;
+    }
+  });
+
+ // 🔷Step 3: Define difficulty levels for sorting
+  const difficultyLevels = {
+    'Beginner': 1,
+    'Intermediate': 2,
+    'Advanced': 3,
+    'Elite': 4,
+    'Super Elite': 5
+  };
+
+  // 🔷Step 4: Count how many majority skills are at each difficulty
+  const difficultyCount = {};
+  majoritySkills.forEach(s => {
+    difficultyCount[s.difficulty] = (difficultyCount[s.difficulty] || 0) + 1;
+  });
+
+  // 🔷Step 5: Sort difficulties from highest to lowest
+  const sortedDifficulties = Object.keys(difficultyLevels).sort(
+    (a, b) => difficultyLevels[b] - difficultyLevels[a]
+  );
+
+  // 🔷Step 6: Determine overall difficulty based on cumulative majority
+  let overallPyramidDifficulty = null;
+  const startingIndex = sortedDifficulties.findIndex(d => difficultyCount[d] >= 1);
+
+  if (startingIndex !== -1) {
+    let cumulative = 0;
+    for (let i = startingIndex; i < sortedDifficulties.length; i++) {
+      cumulative += (difficultyCount[sortedDifficulties[i]] || 0);
+      if (cumulative >= 3) {
+        overallPyramidDifficulty = sortedDifficulties[i];
+        break;
+      }
+    }
+  }
+
+  // 🔷Step 7: Output results
+  outputText += `<strong>\nRequired Number of Skill Flyers for Majority:</strong>   ${majorityPyramid}`;
+  outputText += `<strong>\nPyramid Difficulty Range:</strong>   ${overallPyramidDifficulty || 'Selected skills do not meet rubric requirements for majority'}`;
+
+  document.getElementById('outputp').innerHTML = outputText;
+
+ // 🔷Step 8: Populate Summary 
+  let PyramidSkillListOutput = '';
+  rows.forEach(row => {
+    const skill = row.cells[0].textContent;
+    const difficulty = row.cells[1].textContent;
+    const count = parseInt(row.cells[2].querySelector('input').value) || 0;
+
+    PyramidSkillListOutput += `${count} — ${difficulty} — ${skill}`;
+    if (!row.classList.contains('majority')) PyramidSkillListOutput += ' (Non Majority)';
+    PyramidSkillListOutput += '\n';
+  });
+
+  document.getElementById('PyramidSkills').textContent = PyramidSkillListOutput;
+  document.getElementById('PyramidRange').textContent = overallPyramidDifficulty || 'Rubric Requirements Not Met';
+}
+
+
+
+/************************************************
+|                                               |   
+|             LOCAL AUTOSAVE SYSTEM             |
+|                 💾💾💾💾💾
+|                                               |
+************************************************/
+
+// Save full form state to localStorage
+function autosaveForm() {
+    const data = {};
+
+    // Simple text / number / select fields
+    const simpleFields = [
+        "schoolName","teamLevel","CoachName","CoachEmail",
+        "numAthletes","competitionLocation","teamSync",
+        "additionalTumbling","jumpSequence","legalityRulings"
+    ];
+    simpleFields.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) data[id] = el.value || "";
+    });
+
+    // Tumbling + Jump selected ranges
+    data["TumblingOutput"] = document.getElementById("TumblingOutput").dataset.selected || "";
+    data["JumpOutput"] = document.getElementById("JumpOutput").dataset.selected || "";
+
+    // Stunt & Pyramid tables
+    data["skillCounts"] = collectTableCounts("#skillCounts");
+    data["pyramidCounts"] = collectTableCounts("#PyramidCounts");
+
+    // Save to localStorage
+    localStorage.setItem("rubricFormAutosave", JSON.stringify(data));
+}
+function loadAutosave() {
+    const saved = localStorage.getItem("rubricFormAutosave");
+    if (!saved) return;
+    const data = JSON.parse(saved);
+
+    // Restore simple fields
+    Object.keys(data).forEach(key => {
+        const el = document.getElementById(key);
+        if (el && typeof data[key] === "string") {
+            el.value = data[key];
+        }
+    });
+
+    // Restore Tumbling selection
+    if (data.TumblingOutput) {
+        document.querySelectorAll(".tumblinghighlight").forEach(box => {
+            if (box.dataset.value === data.TumblingOutput) {
+                box.classList.add("selected");
+            }
+        });
+        document.getElementById("TumblingOutput").innerText =
+            "Tumbling Difficulty Range: " + data.TumblingOutput;
+        document.getElementById("TumblingOutput").dataset.selected = data.TumblingOutput;
+    }
+
+    // Restore Jump selection
+    if (data.JumpOutput) {
+        document.querySelectorAll(".jumphighlight").forEach(box => {
+            if (box.dataset.value === data.JumpOutput) {
+                box.classList.add("selected");
+            }
+        });
+        document.getElementById("JumpOutput").innerText =
+            "Jump Difficulty Range: " + data.JumpOutput;
+        document.getElementById("JumpOutput").dataset.selected = data.JumpOutput;
+    }
+
+    // Restore Stunt Table
+    if (Array.isArray(data.skillCounts)) {
+        data.skillCounts.forEach(item => {
+            addRestoredStuntRow(item);
+        });
+    }
+
+    // Restore Pyramid Table
+    if (Array.isArray(data.pyramidCounts)) {
+        data.pyramidCounts.forEach(item => {
+            addRestoredPyramidRow(item);
+        });
+    }
+}
+
+function addRestoredStuntRow(item) {
+  const row = document.createElement("tr");
+
+  row.innerHTML = `
+    <td class="drag-handle">${item.skill}</td>
+    <td>${item.difficulty}</td>
+    <td><input type="number" value="${item.count}" min="0"></td>
+    <td class="delete-btn">🗑️</td>
+  `;
+
+  document.getElementById("skillCounts").appendChild(row);
+
+  row.querySelector(".delete-btn").addEventListener("click", () => {
+    row.remove();
+    autosaveForm();
+  });
+
+  row.querySelector("input").addEventListener("input", autosaveForm);
+  row.querySelector("input").addEventListener("change", autosaveForm);
+}
+
+function addRestoredPyramidRow(item) {
+  const row = document.createElement("tr");
+
+  row.innerHTML = `
+    <td class="drag-handle">${item.skill}</td>
+    <td>${item.difficulty}</td>
+    <td><input type="number" value="${item.count}" min="0"></td>
+    <td class="delete-btn">🗑️</td>
+  `;
+
+  document.getElementById("PyramidCounts").appendChild(row);
+
+  row.querySelector(".delete-btn").addEventListener("click", () => {
+    row.remove();
+    autosaveForm();
+  });
+
+  row.querySelector("input").addEventListener("input", autosaveForm);
+  row.querySelector("input").addEventListener("change", autosaveForm);
+}
+
+// Save whenever any input changes
+document.querySelectorAll("input, textarea, select").forEach(el => {
+    el.addEventListener("input", autosaveForm);
+    el.addEventListener("change", autosaveForm);
+});
+
+// Save when stunt / pyramid skills are clicked
+document.querySelectorAll(".svg-highlight").forEach(el => {
+    el.addEventListener("click", autosaveForm);
+});
+
+// Load saved data on startup
+window.addEventListener("load", loadAutosave);
+
+
+/************************************************
+|                                               |   
+|          PREVIEW SUBMISSION POPUP             |
+|                 📖📖📖📖📖
+|                                               |
+************************************************/
+
+(function () {
+  document.addEventListener("DOMContentLoaded", () => {
+    const previewBtn = document.getElementById("previewBtn");
+    if (previewBtn) {
+      previewBtn.addEventListener("click", () => {
+        try {
+          if (window.generatePreview) window.generatePreview();
+        } catch (e) {
+          console.error("Preview error", e);
+        }
+      });
+    }
+
+    // attach print button
+    const previewPrintBtn = document.getElementById("previewPrintBtn");
+    if (previewPrintBtn) {
+      previewPrintBtn.addEventListener("click", () => {
+        const contentEl = document.getElementById("previewContent");
+        const contentHTML = contentEl ? contentEl.innerHTML : "";
+
+        const printWindow = window.open("", "_blank");
+        printWindow.document.write(`
+          <html>
+            <head>
+              <title>Coaches Rubric Summary</title>
+              <style>
+                body { font-family: Arial, sans-serif; padding:20px; color:#111; }
+                .sectionTitle { margin-top:18px; font-weight:700; font-size:15px; }
+                .divider { height:2px; background:#2F317D; margin:6px 0 10px 0; }
+                pre { white-space:pre-wrap; font-size:14px; }
+              </style>
+            </head>
+            <body>${contentHTML}</body>
+          </html>
+        `);
+        printWindow.document.close();
+        printWindow.focus();
+        printWindow.print();
+        printWindow.close();
+      });
+    }
+  });
+
+  //generate preview popup window
+  window.generatePreview = function generatePreview() 
+    // run existing checkers so Stunt/Pyramid summaries are up to date
+  {    if (typeof runChecker === "function") {
+      try { runChecker(); } catch (e) { console.warn("runChecker error:", e); }
+    }
+
+    if (typeof runChecker2 === "function") {
+      try { runChecker2(); } catch (e) { console.warn("runChecker2 error:", e); }
+    }
+
+    // return text (avoid 'undefined')
+    function val(id) {
+      const el = document.getElementById(id);
+      if (!el) return "";
+	  
+    // For the competition <select>, return visible text if available
+      if (el.tagName === "SELECT" && el.selectedOptions && el.selectedOptions[0]) {
+        return el.selectedOptions[0].textContent || el.value || "";
+      }
+	  
+    // For divs that store selected values
+      if (el.dataset && el.dataset.selected) {
+        return el.dataset.selected || el.textContent || "";
+      }
+      return el.value !== undefined ? el.value : el.textContent;
+    }
+	
+    // small helper to escape any user-provided HTML so content is safe
+    function escapeHtml(unsafe) {
+      if (unsafe === null || unsafe === undefined) return "";
+      return String(unsafe)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    // Build each section content
+    function getTableSummary(tbodyId) {
+      const rows = document.querySelectorAll(`#${tbodyId} tr`);
+      const lines = [];
+
+      rows.forEach((row) => {
+        const cells = row.querySelectorAll("td");
+        if (cells.length < 3) return;
+
+        const skill = cells[0] ? cells[0].textContent.trim() : "";
+        const difficulty = cells[1] ? cells[1].textContent.trim() : "";
+        const input = cells[2].querySelector("input");
+        const count = input ? parseInt(input.value, 10) || 0 : 0;
+
+       let line = `${count} — ${difficulty} — ${skill}`;
+			if (row.classList.contains("additional-toss")) {
+				line += " (Additional Toss)";
+			} else if (row.classList.contains("non-majority")) {
+				line += " (Non Majority)";
+			}
+
+        lines.push(line);
+      });
+
+      return lines.join("\n");
+    }
+
+    function getRangeFromOutput(outputId, label) {
+      const el = document.getElementById(outputId);
+      if (!el) return "";
+
+      const text = el.innerText || el.textContent || "";
+      const match = text.match(new RegExp(`${label}:\\s*(.*)`));
+
+      return match ? match[1].trim() : "";
+    }
+
+    const athletes = escapeHtml(val("numAthletes"));
+    const stuntSkills = escapeHtml(getTableSummary("skillCounts"));
+    const stuntRange = escapeHtml(getRangeFromOutput("output", "Stunt Difficulty Range"));
+    const pyramidSkills = escapeHtml(getTableSummary("PyramidCounts"));
+    const pyramidRange = escapeHtml(getRangeFromOutput("outputp", "Pyramid Difficulty Range"));
+
+    const parts = [];
+
+    function section(title, content) {
+      parts.push(`<div class="divider" style="height:2px;background:#2F317D;margin:6px 0 10px 0;"></div>`);
+      parts.push(`<div class="sectionTitle" style="margin-top:8px;font-weight:700;font-size:15px;text-align:center;">${escapeHtml(title)}</div>`);
+      parts.push(`<div style="white-space:pre-wrap;font-size:14px;margin-bottom:8px;">${content}</div>`);
+    }
+
+    // Coach & Team Info
+    section("TEAM INFO", `<strong>Number of Athletes Performing:</strong> ${athletes || "(not entered)"}` );
+  
+    // Stunt
+    section("STUNT SKILLS", `<strong>Stunt Difficulty Range:</strong> ${stuntRange || "(not calculated)"}\n\n${stuntSkills || "(none recorded)"}`  );
+    
+	// Pyramid
+    section("PYRAMID SKILLS", `<strong>Pyramid Difficulty Range:</strong> ${pyramidRange || "(not calculated)"}\n\n${pyramidSkills || "(none recorded)"}` );
+
+    const previewEl = document.getElementById("previewContent");
+    if (!previewEl) {
+      console.warn("previewContent element not found in DOM.");
+      return;
+    }
+
+    previewEl.innerHTML = parts.join("\n");
+
+    const modal = document.getElementById("previewModal");
+    if (!modal) {
+      console.warn("previewModal element not found in DOM.");
+      return;
+    }
+
+    modal.style.display = "flex";
+    modal.setAttribute("aria-hidden", "false");
+
+    if (typeof previewEl.focus === "function") {
+      previewEl.focus();
+    }
+  };
+})();
+
+window.closePreview = function () {
+  const modal = document.getElementById("previewModal");
+  if (modal) modal.style.display = "none";
+};
+
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!--                                                                                END SCRIPT FUNCTIONALITY                                                                                -->
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+</script>
+
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!--                                                                             BEGIN AUXILIARY HTML INTERFACE                                                                             -->
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+<!-- ======================== ⚠ ERROR ALERT MESSAGE ⚠ ======================== -->
+
+<div id="customAlert" style="display:none;">
+  <div id="customAlertContent">
+    <p id="customAlertText"></p>
+    <button id="customAlertOk">OK</button>
+  </div>
+</div>
+
+<!-- ======================== 🔍 INFO ICON MESSAGE 🔍 ======================== -->
+
+<div id="majorityInfo" class="info-popup">
+  <h3>What Counts as a "Majority"?</h3>
+  <p>For a complete breakdown, view the PDF: </p> 
+  <p><a href="Majority_Breakdown.pdf" target="_blank">Download the Majority Breakdown PDF</a></p>
+  <button onclick="closeInfo('majorityInfo')">Close</button>
+</div>
+
+
+<!-- ===================== 📖 PREVIEW POPUP 📖 ======================= -->
+<div id="previewModal" style="display:none;    position: fixed;    top:0; left:0; width:100%; height:100%;
+    background: rgba(0,0,0,0.6); z-index:99999;    justify-content: center; align-items: center; padding: 20px;">
+  <div style="      background: #fff; max-width:760px; width:100%;      border-radius:10px; padding:22px;      max-height:86vh; overflow-y:auto;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);      font-family: Arial, sans-serif;  ">
+    <div style="display:flex; justify-content:space-between; align-items:center; gap:10px;">
+      <h2 style="margin:0; font-size:26px; color:#c02025"><strong>Stunt & Pyramid Difficulty Range Preview</strong></h2>
+      <div style="display:flex; gap:8px;">
+        <button id="previewPrintBtn" style="padding:8px 12px; border-radius:6px; border:none; cursor:pointer; background:#2F317D; color:#fff;">Print</button>
+        <button onclick="closePreview()" style="padding:8px 12px; border-radius:6px; border:none; cursor:pointer; background:#c02025; color:#fff;">Close</button>
+	  </div>
+    </div>
+	 <div id="previewContent" style="white-space:pre-wrap; font-size:15px; margin-top:14px; color:#111;"></div>
+  </div>
+</div>
+
+
+</body>
+</html>
+
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!--                                                                              END AUXILIARY HTML INTERFACE                                                                              -->
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+
+
+
+
+
+
+
