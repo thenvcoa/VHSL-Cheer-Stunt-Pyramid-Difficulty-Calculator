@@ -98,8 +98,9 @@ tbody tr:hover { background: rgba(47,49,125,0.035); }
 #output, #outputp, #StuntSkills, #StuntRange, #PyramidSkills, #PyramidRange { max-width: 900px; margin-top: 20px; padding: 16px; white-space: pre-wrap; color: #263044;
   background: #f7f8fc; border: 1px solid var(--border-soft); border-radius: 14px;}
 .text-underline { color: var(--vhsl-red); text-decoration: underline; }
-.note-small { color: #6b7280; font-size: 12px; line-height: 1.35; font-style: italic; margin-top: 26px; }
+.note-small { color: #6b7280; font-size: 12px; line-height: 1.35; font-style: italic; margin-top: 26px; text-align: center;}
 .icon { font-size: 24px; vertical-align: middle; }
+.credited-star {display: inline-block; width: 22px; min-width: 22px; font-weight: 800; color: #2F317D; text-align: left;}
 
 /* Responsive Inline SVG for Stunt & Pyramid */
 .svg-highlight { fill: none; stroke: none; outline: none; pointer-events: all; cursor: pointer; }
@@ -326,6 +327,7 @@ tbody tr:hover { background: rgba(47,49,125,0.035); }
 	<button onclick="runChecker()">Calculate Stunt Difficulty Range</button>
     <span class="note-small">
         Majority skills will highlight in green and non-majority skills will highlight in red.
+		<br> ★ = Skills used to determine difficulty range <br>
     </span>
 	</div>
 
@@ -390,6 +392,7 @@ tbody tr:hover { background: rgba(47,49,125,0.035); }
 	<button onclick="runChecker2()">Calculate Pyramid Difficulty Range</button>
 	<span class="note-small">
 		Majority skills will highlight in green and non-majority skills will highlight in red.
+		<br> ★ = Skills used to determine difficulty range <br>
 	</span>
 	</div>
 
@@ -752,7 +755,12 @@ function runChecker(silent = false) {
 
   // 🔶Step 1: Reset row coloring
   rows.forEach(row => {
-    row.classList.remove('majority', 'non-majority', 'additional-toss');
+    row.classList.remove(
+      'majority',
+      'non-majority',
+      'additional-toss',
+      'credited-skill-row'
+    );
   });
 
   // 🔶Step 2: Find all toss rows that meet majority
@@ -794,24 +802,20 @@ function runChecker(silent = false) {
     const region = stuntSkillLookup[skill];
     const isToss = region && region.category === 'Toss';
 
-    if (isToss && count >= majorityStunt) {
-      if (row === countedTossRow) {
-        majoritySkills.push({ skill, difficulty });
-        row.classList.add('majority');
-        outputText += `${count} — ${difficulty} — ${skill}\n`;
-      } else {
-        row.classList.add('additional-toss');
-        outputText += `${count} — ${difficulty} — ${skill} (Additional Toss)\n`;
-      }
-    } else if (count >= majorityStunt) {
+  if (isToss && count >= majorityStunt) {
+    if (row === countedTossRow) {
       majoritySkills.push({ skill, difficulty });
       row.classList.add('majority');
-      outputText += `${count} — ${difficulty} — ${skill}\n`;
     } else {
-      row.classList.add('non-majority');
-      outputText += `${count} — ${difficulty} — ${skill} (Non Majority)\n`;
+      row.classList.add('additional-toss');
     }
-  });
+  } else if (count >= majorityStunt) {
+    majoritySkills.push({ skill, difficulty });
+    row.classList.add('majority');
+  } else {
+    row.classList.add('non-majority');
+  }
+	});
 
   // 🔶Step 5: Count majority skills by difficulty
   const difficultyCount = {};
@@ -838,6 +842,43 @@ function runChecker(silent = false) {
       }
     }
   }
+  
+  
+  const creditedRows = new Set();
+	let creditedNeeded = 2;
+
+  rows.forEach(row => {
+    const difficulty = row.cells[1].textContent.trim();
+
+    if (
+      row.classList.contains('majority') &&
+      overallStuntDifficulty &&
+      difficultyLevels[difficulty] >= difficultyLevels[overallStuntDifficulty] &&
+      creditedNeeded > 0
+    ) {
+      creditedRows.add(row);
+      row.classList.add('credited-skill-row');
+      creditedNeeded--;
+    }
+  });
+
+
+	rows.forEach(row => {
+  const skill = row.cells[0].textContent.trim();
+  const difficulty = row.cells[1].textContent.trim();
+  const count = parseInt(row.cells[2].querySelector('input').value) || 0;
+  const star = creditedRows.has(row) ? '★' : '';
+
+  outputText += `<span class="credited-star">${star}</span>${count} — ${difficulty} — ${skill}`;
+
+  if (row.classList.contains('additional-toss')) {
+    outputText += ' (Additional Toss)';
+  } else if (row.classList.contains('non-majority')) {
+    outputText += ' (Non Majority)';
+  }
+
+  outputText += '\n';
+});
 
   // 🔶Step 8: Add note if extra tosses were excluded
   if (additionalTosses.length > 0) {
@@ -858,8 +899,9 @@ function runChecker(silent = false) {
     const skill = row.cells[0].textContent.trim();
     const difficulty = row.cells[1].textContent.trim();
     const count = parseInt(row.cells[2].querySelector('input').value) || 0;
-
-    StuntSkillListOutput += `${count} — ${difficulty} — ${skill}`;
+    const star = creditedRows.has(row) ? '★' : '';
+	
+	StuntSkillListOutput += `<span class="credited-star">${star}</span>${count} — ${difficulty} — ${skill}`;
 
     if (row.classList.contains('additional-toss')) {
       StuntSkillListOutput += ' (Additional Toss)';
@@ -873,9 +915,10 @@ function runChecker(silent = false) {
   const stuntSkillsEl = document.getElementById('StuntSkills');
   const stuntRangeEl = document.getElementById('StuntRange');
 
-  if (stuntSkillsEl) stuntSkillsEl.textContent = StuntSkillListOutput;
+  if (stuntSkillsEl) stuntSkillsEl.innerHTML = StuntSkillListOutput;
   if (stuntRangeEl) stuntRangeEl.textContent = overallStuntDifficulty || 'Rubric Requirements Not Met';
 }
+
 
 
 
@@ -889,7 +932,13 @@ function runChecker2() {
   let outputText = '<strong>Selected Pyramid Skills:\n\n</strong>';
 
   // 🔷Step 1: Reset table coloring
-  rows.forEach(row => row.classList.remove('majority', 'non-majority'));
+  rows.forEach(row => {
+    row.classList.remove(
+      'majority',
+      'non-majority',
+      'credited-skill-row'
+    );
+  });
 
   // 🔷Step 2: Label Non-Majority Skills and gather majority skills
   rows.forEach(row => {
@@ -900,10 +949,8 @@ function runChecker2() {
     if (count >= majorityPyramid) {
       majoritySkills.push({ skill, difficulty });
       row.classList.add('majority');
-      outputText += `${count} — ${difficulty} — ${skill}\n`;
     } else {
       row.classList.add('non-majority');
-      outputText += `${count} — ${difficulty} — ${skill} (Non Majority)\n`;
     }
   });
 
@@ -941,6 +988,39 @@ function runChecker2() {
       }
     }
   }
+  
+  	const creditedPyramidRows = new Set();
+	let creditedPyramidNeeded = 3;
+
+  rows.forEach(row => {
+    const difficulty = row.cells[1].textContent.trim();
+
+    if (
+      row.classList.contains('majority') &&
+      overallPyramidDifficulty &&
+      difficultyLevels[difficulty] >= difficultyLevels[overallPyramidDifficulty] &&
+      creditedPyramidNeeded > 0
+    ) {
+      creditedPyramidRows.add(row);
+      row.classList.add('credited-skill-row');
+      creditedPyramidNeeded--;
+    }
+  });
+
+rows.forEach(row => {
+  const skill = row.cells[0].textContent.trim();
+  const difficulty = row.cells[1].textContent.trim();
+  const count = parseInt(row.cells[2].querySelector('input').value) || 0;
+  const star = creditedPyramidRows.has(row) ? '★' : '';
+
+  outputText += `<span class="credited-star">${star}</span>${count} — ${difficulty} — ${skill}`;
+
+  if (row.classList.contains('non-majority')) {
+    outputText += ' (Non Majority)';
+  }
+
+  outputText += '\n';
+});
 
   // 🔷Step 7: Output results
   outputText += `<strong>\nRequired Number of Skill Flyers for Majority:</strong>   ${majorityPyramid}`;
@@ -954,14 +1034,22 @@ function runChecker2() {
     const skill = row.cells[0].textContent;
     const difficulty = row.cells[1].textContent;
     const count = parseInt(row.cells[2].querySelector('input').value) || 0;
+	const star = creditedPyramidRows.has(row) ? '★' : '';
 
-    PyramidSkillListOutput += `${count} — ${difficulty} — ${skill}`;
-    if (!row.classList.contains('majority')) PyramidSkillListOutput += ' (Non Majority)';
+	PyramidSkillListOutput += `<span class="credited-star">${star}</span>${count} — ${difficulty} — ${skill}`;
+
+    if (row.classList.contains('non-majority')) {
+      PyramidSkillListOutput += ' (Non Majority)';
+    }
+
     PyramidSkillListOutput += '\n';
   });
 
-  document.getElementById('PyramidSkills').textContent = PyramidSkillListOutput;
-  document.getElementById('PyramidRange').textContent = overallPyramidDifficulty || 'Rubric Requirements Not Met';
+  const pyramidSkillsEl = document.getElementById('PyramidSkills');
+  const pyramidRangeEl = document.getElementById('PyramidRange');
+
+  if (pyramidSkillsEl) pyramidSkillsEl.innerHTML = PyramidSkillListOutput;
+  if (pyramidRangeEl) pyramidRangeEl.textContent = overallPyramidDifficulty || 'Rubric Requirements Not Met';
 }
 
 
@@ -1145,6 +1233,12 @@ window.addEventListener("load", loadAutosave);
                 .sectionTitle { margin-top:18px; font-weight:700; font-size:15px; }
                 .divider { height:2px; background:#2F317D; margin:6px 0 10px 0; }
                 pre { white-space:pre-wrap; font-size:14px; }
+                .credited-star {
+                  display: inline-block;
+                  width: 22px;
+                  font-weight: 800;
+                  color: #2F317D;
+                }
               </style>
             </head>
             <body>${contentHTML}</body>
@@ -1198,25 +1292,29 @@ window.addEventListener("load", loadAutosave);
     }
 
     // Build each section content
-    function getTableSummary(tbodyId) {
+        function buildSummaryFromTable(tbodyId) {
       const rows = document.querySelectorAll(`#${tbodyId} tr`);
       const lines = [];
 
-      rows.forEach((row) => {
+      rows.forEach(row => {
         const cells = row.querySelectorAll("td");
         if (cells.length < 3) return;
 
-        const skill = cells[0] ? cells[0].textContent.trim() : "";
-        const difficulty = cells[1] ? cells[1].textContent.trim() : "";
+        const skill = cells[0].textContent.trim();
+        const difficulty = cells[1].textContent.trim();
         const input = cells[2].querySelector("input");
         const count = input ? parseInt(input.value, 10) || 0 : 0;
 
-       let line = `${count} — ${difficulty} — ${skill}`;
-			if (row.classList.contains("additional-toss")) {
-				line += " (Additional Toss)";
-			} else if (row.classList.contains("non-majority")) {
-				line += " (Non Majority)";
-			}
+        const isCredited = row.classList.contains("credited-skill-row");
+        const marker = `<span class="credited-star">${isCredited ? "★" : ""}</span>`;
+
+        let line = `${marker}${count} — ${escapeHtml(difficulty)} — ${escapeHtml(skill)}`;
+
+        if (row.classList.contains("additional-toss")) {
+          line += " (Additional Toss)";
+        } else if (row.classList.contains("non-majority")) {
+          line += " (Non Majority)";
+        }
 
         lines.push(line);
       });
@@ -1235,9 +1333,21 @@ window.addEventListener("load", loadAutosave);
     }
 
     const athletes = escapeHtml(val("numAthletes"));
-    const stuntSkills = escapeHtml(getTableSummary("skillCounts"));
+
+    const stuntSkillsEl = document.getElementById("StuntSkills");
+    const pyramidSkillsEl = document.getElementById("PyramidSkills");
+
+    const stuntSkills =
+      stuntSkillsEl && stuntSkillsEl.innerHTML.trim()
+        ? stuntSkillsEl.innerHTML.trim()
+        : buildSummaryFromTable("skillCounts");
+
+    const pyramidSkills =
+      pyramidSkillsEl && pyramidSkillsEl.innerHTML.trim()
+        ? pyramidSkillsEl.innerHTML.trim()
+        : buildSummaryFromTable("PyramidCounts");
+
     const stuntRange = escapeHtml(getRangeFromOutput("output", "Stunt Difficulty Range"));
-    const pyramidSkills = escapeHtml(getTableSummary("PyramidCounts"));
     const pyramidRange = escapeHtml(getRangeFromOutput("outputp", "Pyramid Difficulty Range"));
 
     const parts = [];
@@ -1248,14 +1358,20 @@ window.addEventListener("load", loadAutosave);
       parts.push(`<div style="white-space:pre-wrap;font-size:14px;margin-bottom:8px;">${content}</div>`);
     }
 
-    // Coach & Team Info
-    section("TEAM INFO", `<strong>Number of Athletes Performing:</strong> ${athletes || "(not entered)"}` );
-  
-    // Stunt
-    section("STUNT SKILLS", `<strong>Stunt Difficulty Range:</strong> ${stuntRange || "(not calculated)"}\n\n${stuntSkills || "(none recorded)"}`  );
-    
-	// Pyramid
-    section("PYRAMID SKILLS", `<strong>Pyramid Difficulty Range:</strong> ${pyramidRange || "(not calculated)"}\n\n${pyramidSkills || "(none recorded)"}` );
+    section(
+      "TEAM INFO",
+      `<strong>Number of Athletes Performing:</strong> ${athletes || "(not entered)"}`
+    );
+
+    section(
+      "STUNT SKILLS",
+      `<strong>Stunt Difficulty Range:</strong> ${stuntRange || "(not calculated)"}\n\n${stuntSkills || "(none recorded)"}`
+    );
+
+    section(
+      "PYRAMID SKILLS",
+      `<strong>Pyramid Difficulty Range:</strong> ${pyramidRange || "(not calculated)"}\n\n${pyramidSkills || "(none recorded)"}`
+    );
 
     const previewEl = document.getElementById("previewContent");
     if (!previewEl) {
