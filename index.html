@@ -242,69 +242,164 @@ tbody tr:hover { background: rgba(47,49,125,0.035); }
  
 </div>
 	
+  <!-- ======= RESPONSIVE INLINE SVG: STUNT RUBRIC ======= -->		
   <div class="wrapper svg-wrapper" aria-label="Stunt Rubric (interactive)">
   <!-- Outer SVG (viewBox matches the original SVG canvas: 0 0 928 705) -->
   <svg id="StuntRubricSVG" viewBox="0 0 928 705" preserveAspectRatio="xMidYMid meet" role="img" aria-label="VHSL Stunt Rubric">
     <!-- Use your uploaded SVG file as the background image inside the inline SVG -->
     <!-- Keep the filename exactly as you host it. If you inlined the whole SVG body instead, remove this <image> line. -->
-    <image href="Stunt Rubric 2026.svg" x="0" y="0" width="928" height="705" preserveAspectRatio="xMidYMid meet" />
+	<!-- <image href="Stunt Rubric 2026.svg" x="0" y="0" width="928" height="705" preserveAspectRatio="xMidYMid meet" /> -->
 
 	<!--  🚨🛑🚧🚨🛑🚧🚨🛑🚧🚨🛑🚧🚨🛑🚧🚨🛑🚧🚨🛑🚧🚨🛑🚧🚨🛑🚧🚨🛑🚧🚨🛑🚧🚨🛑🚧 	       -->
 	<!--  04/27/26 - ALTERNATIVE: HOST IMAGE DIRECTLY FROM PNG TO AVOID MAPPING TO SVG. All click box functionality remains the same.   -->
-	<!--  <image href="Stunt Rubric 2026 DRAFT.png" x="0" y="0" width="928" height="705" preserveAspectRatio="xMidYMid meet" />   -->
-
-    <!-- Responsive region overlays.
-         Coordinates are percentages (x, y, width, height) so they scale with the SVG.
+	<image href="Stunt Rubric 2026.png" x="0" y="0" width="928" height="705" preserveAspectRatio="xMidYMid meet" />
+  
+  <!-- Responsive region overlays.
+         Coordinates are percentages (x, y, width, height) so they scale with the rubric image.
          IDs match original HTML so your JS mapping still applies.
          These rects were computed from your PNG coords and corrected for the SVG's internal translate.
     -->
 
-    <!-- Inversions -->
-    <rect id="i1" class="svg-highlight inversion" x="7.25%" y="18.5%" width="17.75%" height="3%"></rect>
-    <rect id="i2" class="svg-highlight inversion" x="7.25%" y="21.25%" width="17.75%" height="3.5%"></rect>
-    <rect id="i3" class="svg-highlight inversion" x="7.25%" y="24.75%" width="17.75%" height="3%"></rect>
-    <rect id="i4" class="svg-highlight inversion" x="25.25%" y="18.5%" width="17.5%" height="3%"></rect>
-	<rect id="i5" class="svg-highlight inversion" x="25.25%" y="21.25%" width="17.5%" height="3.5%"></rect>
-	<rect id="i6" class="svg-highlight inversion" x="25.25%" y="24.75%" width="17.5%" height="3%"></rect>
-	<rect id="i7" class="svg-highlight inversion" x="42.75%" y="18.5%" width="18.25%" height="3%"></rect>
-	<rect id="i8" class="svg-highlight inversion" x="42.75%" y="24.75%" width="18.25%" height="3%"></rect>
+<!-- 🟣INVERSIONS🟣 -->
+	<!-- Beginner -->
+    <rect id="i1" class="svg-highlight inversion" x="6.25%" y="16%" width="20.25%" height="3.5%"></rect>
+    <rect id="i2" class="svg-highlight inversion" x="6.25%" y="19.5%" width="20.25%" height="3%"></rect>
+    <rect id="i3" class="svg-highlight inversion" x="6.25%" y="22.5%" width="20.25%" height="3%"></rect>
+	<rect id="i4" class="svg-highlight inversion" x="6.25%" y="25.75%" width="20.25%" height="3%"></rect>
+	<rect id="i5" class="svg-highlight inversion" x="6.25%" y="28.75%" width="20.25%" height="3.25%"></rect>
+	<!-- Intermediate -->	
+    <rect id="i6" class="svg-highlight inversion" x="26.25%" y="16%" width="17.75%" height="3.5%"></rect>
+	<rect id="i7" class="svg-highlight inversion" x="26.25%" y="19.5%" width="17.75%" height="3%"></rect>
+	<rect id="i8" class="svg-highlight inversion" x="26.25%" y="22.5%" width="17.75%" height="3%"></rect>
+	<rect id="i9" class="svg-highlight inversion" x="26.25%" y="25.75%" width="17.75%" height="3%"></rect>
+	<rect id="i10" class="svg-highlight inversion" x="26.25%" y="28.75%" width="17.75%" height="3.25%"></rect>
+	<!-- Advanced -->
+	<rect id="i11" class="svg-highlight inversion" x="44%" y="19.5%" width="18.5%" height="3%"></rect>
+	<rect id="i12" class="svg-highlight inversion" x="44%" y="22.5%" width="18.5%" height="3%"></rect>
+	<rect id="i13" class="svg-highlight inversion" x="44%" y="25.75%" width="18.5%" height="3%"></rect>	
+	<!-- Elite -->
+	<rect id="i14" class="svg-highlight inversion" x="62.5%" y="19.5%" width="18.25%" height="3%"></rect>
+	<rect id="i15" class="svg-highlight inversion" x="62.5%" y="25.75%" width="18.25%" height="3%"></rect>
+	<rect id="i16" class="svg-highlight inversion" x="62.5%" y="28.75%" width="18.25%" height="3.25%"></rect>
+	<!-- Super Elite -->	
+	<rect id="i17" class="svg-highlight inversion" x="81%" y="19.5%" width="18.25%" height="3%"></rect>	
+	<rect id="i18" class="svg-highlight inversion" x="81%" y="25.75%" width="18.25%" height="3%"></rect>
+	<rect id="i19" class="svg-highlight inversion" x="81%" y="28.75%" width="18.25%" height="3.25%"></rect>
+
+<!-- 🟢RELEASES🟢 -->
+	<!-- Beginner -->
+    <rect id="r1" class="svg-highlight release" x="6.25%" y="33%" width="20.25%" height="2.5%"></rect>
+    <rect id="r2" class="svg-highlight release" x="6.25%" y="35.5%" width="20.25%" height="3%"></rect>
+    <rect id="r3" class="svg-highlight release" x="6.25%" y="38.5%" width="20.25%" height="2%"></rect>
+    <rect id="r4" class="svg-highlight release" x="6.25%" y="40.5%" width="20.25%" height="2.5%"></rect>
+    <rect id="r5" class="svg-highlight release" x="6.25%" y="48%" width="20.25%" height="2.5%"></rect>	
+	<!-- Intermediate -->		
+    <rect id="r6" class="svg-highlight release" x="26.25%" y="33%" width="17.75%" height="2.5%"></rect>	
+    <rect id="r7" class="svg-highlight release" x="26.25%" y="35.5%" width="17.75%" height="3%"></rect>
+    <rect id="r8" class="svg-highlight release" x="26.25%" y="38.5%" width="17.75%" height="2%"></rect>
+    <rect id="r9" class="svg-highlight release" x="26.25%" y="40.5%" width="17.75%" height="2.5%"></rect>	
+    <rect id="r10" class="svg-highlight release" x="26.25%" y="43%" width="17.75%" height="2.5%"></rect>	
+    <rect id="r11" class="svg-highlight release" x="26.25%" y="45.5%" width="17.75%" height="2.5%"></rect>
+    <rect id="r12" class="svg-highlight release" x="26.25%" y="48%" width="17.75%" height="2.5%"></rect>
+	<!-- Advanced -->
+    <rect id="r13" class="svg-highlight release" x="44%" y="33%" width="18.5%" height="2.5%"></rect>	
+    <rect id="r14" class="svg-highlight release" x="44%" y="35.5%" width="18.5%" height="3%"></rect>
+    <rect id="r15" class="svg-highlight release" x="44%" y="38.5%" width="18.5%" height="2%"></rect>
+    <rect id="r16" class="svg-highlight release" x="44%" y="40.5%" width="18.5%" height="2.5%"></rect>
+    <rect id="r17" class="svg-highlight release" x="44%" y="43%" width="18.5%" height="2.5%"></rect>	
+    <rect id="r18" class="svg-highlight release" x="44%" y="45.5%" width="18.5%" height="2.5%"></rect>
+    <rect id="r19" class="svg-highlight release" x="44%" y="48%" width="18.5%" height="2.5%"></rect>
+    <rect id="r20" class="svg-highlight release" x="44%" y="50.5%" width="18.5%" height="2.5%"></rect>	
+	<!-- Elite -->	
+    <rect id="r21" class="svg-highlight release" x="62.5%" y="33%" width="18.25%" height="2.5%"></rect>	
+    <rect id="r22" class="svg-highlight release" x="62.5%" y="38.5%" width="18.25%" height="2%"></rect>
+    <rect id="r23" class="svg-highlight release" x="62.5%" y="40.5%" width="18.25%" height="2.5%"></rect>
+    <rect id="r24" class="svg-highlight release" x="62.5%" y="43%" width="18.25%" height="2.5%"></rect>	
+    <rect id="r25" class="svg-highlight release" x="62.5%" y="45.5%" width="18.25%" height="2.5%"></rect>
+    <rect id="r26" class="svg-highlight release" x="62.5%" y="48%" width="18.25%" height="2.5%"></rect>
+    <rect id="r27" class="svg-highlight release" x="62.5%" y="50.5%" width="18.25%" height="2.5%"></rect>		
+	<!-- Super Elite -->
+    <rect id="r28" class="svg-highlight release" x="81%" y="33%" width="18.25%" height="2.5%"></rect>	
+    <rect id="r29" class="svg-highlight release" x="81%" y="38.5%" width="18.25%" height="2%"></rect>
+    <rect id="r30" class="svg-highlight release" x="81%" y="40.5%" width="18.25%" height="2.5%"></rect>
+    <rect id="r31" class="svg-highlight release" x="81%" y="43%" width="18.25%" height="2.5%"></rect>	
+    <rect id="r32" class="svg-highlight release" x="81%" y="45.5%" width="18.25%" height="2.5%"></rect>
+    <rect id="r33" class="svg-highlight release" x="81%" y="48%" width="18.25%" height="2.5%"></rect>
+    <rect id="r34" class="svg-highlight release" x="81%" y="50.5%" width="18.25%" height="2.5%"></rect>		
+
+<!-- 🔴TWISTING🔴 -->
+	<!-- Beginner -->
+    <rect id="t1" class="svg-highlight twisting" x="6.25%" y="54.25%" width="20.25%" height="2%"></rect>
+    <rect id="t2" class="svg-highlight twisting" x="6.25%" y="56.75%" width="20.25%" height="2%"></rect>
+    <rect id="t3" class="svg-highlight twisting" x="6.25%" y="58.75%" width="20.25%" height="2.5%"></rect>
+	<!-- Intermediate -->			
+    <rect id="t4" class="svg-highlight twisting" x="26.25%" y="54.25%" width="17.75%" height="2%"></rect>
+    <rect id="t5" class="svg-highlight twisting" x="26.25%" y="56.75%" width="17.75%" height="2%"></rect>
+    <rect id="t6" class="svg-highlight twisting" x="26.25%" y="58.75%" width="17.75%" height="2.5%"></rect>	
+	<!-- Advanced -->
+    <rect id="t7" class="svg-highlight twisting" x="44%" y="54.25%" width="18.5%" height="2%"></rect>
+    <rect id="t8" class="svg-highlight twisting" x="44%" y="56.75%" width="18.5%" height="2%"></rect>
+	<!-- Elite -->	
+    <rect id="t9" class="svg-highlight twisting" x="62.5%" y="54.25%" width="18.25%" height="2%"></rect>
+    <rect id="t10" class="svg-highlight twisting" x="62.5%" y="56.75%" width="18.25%" height="2%"></rect>
+    <rect id="t11" class="svg-highlight twisting" x="62.5%" y="58.75%" width="18.25%" height="2.5%"></rect>
+    <rect id="t12" class="svg-highlight twisting" x="62.5%" y="61.25%" width="18.25%" height="2.75%"></rect>	
+	<!-- Super Elite -->
+    <rect id="t13" class="svg-highlight twisting" x="81%" y="54.25%" width="18.25%" height="2%"></rect>
+    <rect id="t14" class="svg-highlight twisting" x="81%" y="56.75%" width="18.25%" height="2%"></rect>
+    <rect id="t15" class="svg-highlight twisting" x="81%" y="58.75%" width="18.25%" height="2.5%"></rect>
+    <rect id="t16" class="svg-highlight twisting" x="81%" y="61.25%" width="18.25%" height="2.75%"></rect>	
+    <rect id="t17" class="svg-highlight twisting" x="81%" y="64%" width="18.25%" height="2.25%"></rect>
+
+<!-- 🔵SINGLE BASE🔵 -->
+	<!-- Beginner -->
+    <rect id="c1" class="svg-highlight coed" x="6.25%" y="67.5%" width="20.25%" height="2.5%"></rect>
+    <rect id="c2" class="svg-highlight coed" x="6.25%" y="74.25%" width="20.25%" height="2.25%"></rect>
+    <rect id="c3" class="svg-highlight coed" x="6.25%" y="76.5%" width="20.25%" height="2.5%"></rect>
+	<!-- Intermediate -->	
+    <rect id="c4" class="svg-highlight coed" x="26.25%" y="67.5%" width="17.75%" height="2.5%"></rect>
+    <rect id="c5" class="svg-highlight coed" x="26.25%" y="70%" width="17.75%" height="2.25%"></rect>
+    <rect id="c6" class="svg-highlight coed" x="26.25%" y="74.25%" width="17.75%" height="2.25%"></rect>
+    <rect id="c7" class="svg-highlight coed" x="26.25%" y="76.5%" width="17.75%" height="2.5%"></rect>
+    <rect id="c8" class="svg-highlight coed" x="26.25%" y="79%" width="17.75%" height="2.5%"></rect>
+    <rect id="c9" class="svg-highlight coed" x="26.25%" y="81.5%" width="17.75%" height="2.25%"></rect>
+	<!-- Advanced -->
+    <rect id="c10" class="svg-highlight coed" x="44%" y="67.5%" width="18.5%" height="2.5%"></rect>
+    <rect id="c11" class="svg-highlight coed" x="44%" y="70%" width="18.5%" height="2.25%"></rect>
+    <rect id="c12" class="svg-highlight coed" x="44%" y="72.25%" width="18.5%" height="2%"></rect>	
+    <rect id="c13" class="svg-highlight coed" x="44%" y="74.25%" width="18.5%" height="2.25%"></rect>
+    <rect id="c14" class="svg-highlight coed" x="44%" y="76.5%" width="18.5%" height="2.5%"></rect>
+    <rect id="c15" class="svg-highlight coed" x="44%" y="79%" width="18.5%" height="2.5%"></rect>
+    <rect id="c16" class="svg-highlight coed" x="44%" y="81.5%" width="18.5%" height="2.25%"></rect>
+	<!-- Elite -->	
+    <rect id="c17" class="svg-highlight coed" x="62.5%" y="67.5%" width="18.25%" height="2.5%"></rect>
+    <rect id="c18" class="svg-highlight coed" x="62.5%" y="70%" width="18.25%" height="2.25%"></rect>
+    <rect id="c19" class="svg-highlight coed" x="62.5%" y="72.25%" width="18.25%" height="2%"></rect>	
+    <rect id="c20" class="svg-highlight coed" x="62.5%" y="74.25%" width="18.25%" height="2.25%"></rect>
+    <rect id="c21" class="svg-highlight coed" x="62.5%" y="76.5%" width="18.25%" height="2.5%"></rect>
+    <rect id="c22" class="svg-highlight coed" x="62.5%" y="79%" width="18.25%" height="2.5%"></rect>
+    <rect id="c23" class="svg-highlight coed" x="62.5%" y="81.5%" width="18.25%" height="2.25%"></rect>
+    <rect id="c24" class="svg-highlight coed" x="62.5%" y="83.75%" width="18.25%" height="2%"></rect>
+	<!-- Super Elite -->
+    <rect id="c25" class="svg-highlight coed" x="81%" y="67.5%" width="18.25%" height="2.5%"></rect>
+    <rect id="c26" class="svg-highlight coed" x="81%" y="70%" width="18.25%" height="2.25%"></rect>
+    <rect id="c27" class="svg-highlight coed" x="81%" y="72.25%" width="18.25%" height="2%"></rect>	
+    <rect id="c28" class="svg-highlight coed" x="81%" y="74.25%" width="18.25%" height="2.25%"></rect>
+    <rect id="c29" class="svg-highlight coed" x="81%" y="79%" width="18.25%" height="2.5%"></rect>
+    <rect id="c30" class="svg-highlight coed" x="81%" y="81.5%" width="18.25%" height="2.25%"></rect>
+    <rect id="c31" class="svg-highlight coed" x="81%" y="83.75%" width="18.25%" height="2%"></rect>
+
+<!-- 🟠OTHER🟠 -->
+    <rect id="o1" class="svg-highlight other" x="6.25%" y="87%" width="20.25%" height="2.75%"></rect>
+    <rect id="o2" class="svg-highlight other" x="26.25%" y="87%" width="17.75%" height="2.75%"></rect>
 	
-	<rect id="i9" class="svg-highlight inversion" x="61%" y="18.5%" width="18.5%" height="3%"></rect>
-	<rect id="i10" class="svg-highlight inversion" x="61%" y="24.75%" width="18.5%" height="3%"></rect>
-	<rect id="i11" class="svg-highlight inversion" x="61%" y="27.75%" width="18.5%" height="3%"></rect>
-	<rect id="i12" class="svg-highlight inversion" x="79.75%" y="24.75%" width="18.25%" height="3%"></rect>
-	<rect id="i13" class="svg-highlight inversion" x="79.75%" y="27.75%" width="18.25%" height="3%"></rect>
+<!-- 🟡TOSS🟡 -->
+    <rect id="o3" class="svg-highlight toss" x="6.25%" y="91%" width="20.25%" height="4%"></rect>
+	<rect id="o4" class="svg-highlight toss" x="26.25%" y="91%" width="17.5%" height="4%"></rect>
+	<rect id="o5" class="svg-highlight toss" x="44%" y="91%" width="18.5%" height="4%"></rect>
+	<rect id="o6" class="svg-highlight toss" x="62.5%" y="91%" width="18.25%" height="4%"></rect>
+	<rect id="o7" class="svg-highlight toss" x="81%" y="91%" width="18.25%" height="4%"></rect>
 
-    <!-- Releases -->
-    <rect id="r1" class="svg-highlight release" x="7.25%" y="32%" width="17.75%" height="2.5%"></rect>
-    <rect id="r2" class="svg-highlight release" x="7.25%" y="34.5%" width="17.75%" height="2%"></rect>
-    <rect id="r3" class="svg-highlight release" x="7.25%" y="36.5%" width="17.75%" height="2.5%"></rect>
-
-    <!-- Twisting -->
-    <rect id="t1" class="svg-highlight twisting" x="7.25%" y="52.5%" width="17.75%" height="2%"></rect>
-    <rect id="t2" class="svg-highlight twisting" x="7.25%" y="54.75%" width="17.75%" height="2%"></rect>
-    <rect id="t3" class="svg-highlight twisting" x="7.25%" y="57%" width="17.75%" height="2.5%"></rect>
-
-    <!-- Coed -->
-    <rect id="c1" class="svg-highlight coed" x="7.25%" y="65%" width="17.75%" height="2.25%"></rect>
-    <rect id="c2" class="svg-highlight coed" x="7.25%" y="71.5%" width="17.75%" height="2.5%"></rect>
-    <rect id="c3" class="svg-highlight coed" x="7.25%" y="74%" width="17.75%" height="2.5%"></rect>
-
-    <!-- Other -->
-    <rect id="o1" class="svg-highlight other" x="7.25%" y="84.25%" width="17.75%" height="2.75%"></rect>
-    <rect id="o2" class="svg-highlight other" x="25.25%" y="84.25%" width="17.5%" height="2.75%"></rect>
-	
-	 <!-- Toss -->
-    <rect id="o3" class="svg-highlight toss" x="7.25%" y="88.25%" width="17.75%" height="4%"></rect>
-	<rect id="o4" class="svg-highlight toss" x="25.25%" y="88.25%" width="17.5%" height="4%"></rect>
-	<rect id="o5" class="svg-highlight toss" x="42.75%" y="88.25%" width="18.25%" height="4%"></rect>
-	<rect id="o6" class="svg-highlight toss" x="61.25%" y="88.25%" width="18.25%" height="4%"></rect>
-	<rect id="o7" class="svg-highlight toss" x="79.75%" y="88.25%" width="18.5%" height="4%"></rect>
-
-    <!-- Bottom header/test boxes -->
-    <rect id="h1" class="svg-highlight inversion" x="20%" y="80%" width="20%" height="3%"></rect>
-    <rect id="h2" class="svg-highlight release"   x="45%" y="80%" width="20%" height="3%"></rect>
-    <rect id="h3" class="svg-highlight twisting"  x="70%" y="80%" width="20%" height="3%"></rect>
   </svg>
   </div>
 	
@@ -350,25 +445,70 @@ tbody tr:hover { background: rgba(47,49,125,0.035); }
   <svg id="PyramidRubricSVG" viewBox="0 0 1174 643" preserveAspectRatio="xMidYMid meet" role="img" aria-label="VHSL Pyramid Rubric">
     <!-- Use your uploaded SVG file as the background image inside the inline SVG -->
     <!-- Keep the filename exactly as you host it. If you inlined the whole SVG body instead, remove this <image> line. -->
-    <image href="Pyramid Rubric 2026.svg" x="0" y="0" width="1174" height="643" preserveAspectRatio="xMidYMid meet" />
+    <!-- <image href="Pyramid Rubric 2026.svg" x="0" y="0" width="1174" height="643" preserveAspectRatio="xMidYMid meet" /> -->
 
 	<!--  🚨🛑🚧🚨🛑🚧🚨🛑🚧🚨🛑🚧🚨🛑🚧🚨🛑🚧🚨🛑🚧🚨🛑🚧🚨🛑🚧🚨🛑🚧🚨🛑🚧🚨🛑🚧 	       -->
 	<!--  04/27/26 - ALTERNATIVE: HOST IMAGE DIRECTLY FROM PNG TO AVOID MAPPING TO SVG. All click box functionality remains the same.   -->
-	<!-- <image href="Pyramid Rubric 2026 DRAFT.png" x="0" y="0" width="1174" height="643" preserveAspectRatio="xMidYMid meet" />     -->
+	<image href="Pyramid Rubric 2026.png" x="0" y="0" width="1174" height="643" preserveAspectRatio="xMidYMid meet" />    
 
-    <!-- Highlight regions (same pattern as Stunt) -->
-    <rect id="n1" class="svg-highlight inversion"  x="18.5%" y="16.75%" width="15%" height="5%"></rect>
-    <rect id="n2" class="svg-highlight inversion"  x="18.5%" y="21.75%" width="15%" height="6.25%"></rect>
-    <rect id="n3" class="svg-highlight inversion"  x="18.5%" y="33.75%" width="15%" height="5.25%"></rect>
-    <rect id="n4" class="svg-highlight inversion"  x="33.5%" y="16.75%" width="15.25%" height="5%"></rect>
+<!-- 🟣NON-RELEASE TRANSITIONS🟣 -->
+    <rect id="n1" class="svg-highlight inversion"  x="17.75%" y="17.75%" width="15.5%" height="5.25%"></rect>
+    <rect id="n2" class="svg-highlight inversion"  x="17.75%" y="23.25%" width="15.5%" height="6.25%"></rect>
+    <rect id="n3" class="svg-highlight inversion"  x="17.75%" y="35.25%" width="15.5%" height="5.5%"></rect>
+    
+	<rect id="n4" class="svg-highlight inversion"  x="33.25%" y="17.75%" width="15.5%" height="5.25%"></rect>
+    <rect id="n5" class="svg-highlight inversion"  x="33.25%" y="23.25%" width="15.5%" height="6.25%"></rect>
+    <rect id="n6" class="svg-highlight inversion"  x="33.25%" y="35.25%" width="15.5%" height="5.5%"></rect>	
+    <rect id="n7" class="svg-highlight inversion"  x="33.25%" y="40.75%" width="15.5%" height="5.75%"></rect>
 
-    <rect id="pr1" class="svg-highlight release"    x="18.5%" y="47.25%" width="15%" height="6.5%"></rect>
-    <rect id="pr2" class="svg-highlight release"    x="18.5%" y="53.75%" width="15%" height="6.5%"></rect>
-    <rect id="pr3" class="svg-highlight release"    x="33.75%" y="47.25%" width="15%" height="6.5%"></rect>
+    <rect id="n8" class="svg-highlight inversion"  x="48.75%" y="23.25%" width="16.75%" height="6.25%"></rect>
+    <rect id="n9" class="svg-highlight inversion"  x="48.75%" y="29.5%" width="16.75%" height="6%"></rect>
+    <rect id="n10" class="svg-highlight inversion"  x="48.75%" y="35.25%" width="16.75%" height="5.5%"></rect>	
+    <rect id="n11" class="svg-highlight inversion"  x="48.75%" y="40.75%" width="16.75%" height="5.75%"></rect>
 
-    <rect id="b1" class="svg-highlight twisting"   x="18.5%" y="74.75%" width="15%" height="4.5%"></rect>
-    <rect id="b2" class="svg-highlight twisting"   x="18.5%" y="79.5%" width="15%" height="6.25%"></rect>
-    <rect id="b3" class="svg-highlight twisting"   x="18.5%" y="85.75%" width="15%" height="8.5%"></rect>
+    <rect id="n12" class="svg-highlight inversion"  x="65.5%" y="29.5%" width="17.5%" height="6%"></rect>
+    <rect id="n13" class="svg-highlight inversion"  x="65.5%" y="35.25%" width="17.5%" height="5.5%"></rect>	
+    <rect id="n14" class="svg-highlight inversion"  x="65.5%" y="40.75%" width="17.5%" height="5.75%"></rect>
+
+    <rect id="n15" class="svg-highlight inversion"  x="83%" y="40.75%" width="16.75%" height="5.75%"></rect>
+
+<!-- 🟢PYRAMID RELEASES🟢 -->	
+    <rect id="pr1" class="svg-highlight release"    x="17.75%" y="48%" width="15.5%" height="6.75%"></rect>
+    <rect id="pr2" class="svg-highlight release"    x="17.75%" y="54.75%" width="15.5%" height="6.5%"></rect>
+
+    <rect id="pr3" class="svg-highlight release"    x="33.25%" y="48%" width="15.5%" height="6.75%"></rect>
+    <rect id="pr4" class="svg-highlight release"    x="33.25%" y="54.75%" width="15.5%" height="6.5%"></rect>
+    <rect id="pr5" class="svg-highlight release"    x="33.25%" y="61.25%" width="15.5%" height="6.75%"></rect>	
+    <rect id="pr6" class="svg-highlight release"    x="33.25%" y="68%" width="15.5%" height="6.5%"></rect>
+
+    <rect id="pr7" class="svg-highlight release"    x="48.75%" y="54.75%" width="16.75%" height="6.5%"></rect>
+    <rect id="pr8" class="svg-highlight release"    x="48.75%" y="61.25%" width="16.75%" height="6.75%"></rect>	
+    <rect id="pr9" class="svg-highlight release"    x="48.75%" y="68%" width="16.75%" height="6.5%"></rect>
+
+    <rect id="pr10" class="svg-highlight release"    x="65.5%" y="54.75%" width="17.5%" height="6.5%"></rect>
+    <rect id="pr11" class="svg-highlight release"    x="65.5%" y="61.25%" width="17.5%" height="6.75%"></rect>	
+    <rect id="pr12" class="svg-highlight release"    x="65.5%" y="68%" width="17.5%" height="6.5%"></rect>
+
+    <rect id="pr13" class="svg-highlight release"    x="83%" y="54.75%" width="16.75%" height="6.5%"></rect>
+    <rect id="pr14" class="svg-highlight release"    x="83%" y="68%" width="16.75%" height="6.5%"></rect>
+
+<!-- 🔴BRACED ROLL/FLIP🔴 -->
+    <rect id="b1" class="svg-highlight twisting"   x="17.75%" y="75.75%" width="15.5%" height="5.25%"></rect>
+    <rect id="b2" class="svg-highlight twisting"   x="17.75%" y="81%" width="15.5%" height="6.5%"></rect>
+    <rect id="b3" class="svg-highlight twisting"   x="17.75%" y="87.5%" width="15.5%" height="8.75%"></rect>
+
+    <rect id="b4" class="svg-highlight twisting"   x="33.25%" y="75.75%" width="15.5%" height="5.25%"></rect>
+    <rect id="b5" class="svg-highlight twisting"   x="33.25%" y="81%" width="15.5%" height="6.5%"></rect>
+    <rect id="b6" class="svg-highlight twisting"   x="33.25%" y="87.5%" width="15.5%" height="8.75%"></rect>
+
+    <rect id="b7" class="svg-highlight twisting"   x="48.75%" y="81%" width="16.75%" height="6.5%"></rect>
+    <rect id="b8" class="svg-highlight twisting"   x="48.75%" y="87.5%" width="16.75%" height="8.75%"></rect>
+
+    <rect id="b9" class="svg-highlight twisting"   x="65.5%" y="81%" width="17.5%" height="6.5%"></rect>
+    <rect id="b10" class="svg-highlight twisting"   x="65.5%" y="87.5%" width="17.5%" height="8.75%"></rect>
+
+    <rect id="b11" class="svg-highlight twisting"   x="83%" y="81%" width="16.75%" height="6.5%"></rect>
+    <rect id="b12" class="svg-highlight twisting"   x="83%" y="87.5%" width="16.75%" height="8.75%"></rect>
 
   </svg>
   </div>
@@ -430,59 +570,167 @@ function closeInfo(id) {  document.getElementById(id).style.display = "none";}
 
 //Labels for all stunt & pyramid skills
 const StuntRegions = [
-  { id: 'i1', skill: 'Non-Release Inversions - Prep Level and Below to Below Prep', category: 'Inversion', difficulty: 'Beginner'},
-  { id: 'i2', skill: 'Below Prep Level Inversions to Ground', category: 'Inversion', difficulty: 'Beginner' },
-  { id: 'i3', skill: 'Released Inversion Prep Level or Below to Below Prep', category: 'Inversion', difficulty: 'Beginner' },
-  { id: 'i4', skill: 'Non-Release Inversions - Prep Level and Below to Prep', category: 'Inversion', difficulty: 'Intermediate' },
-  { id: 'i5', skill: 'Suspended Forward Roll Variations & Inversions', category: 'Inversion', difficulty: 'Intermediate' },  
-  { id: 'i6', skill: 'Released Inversions Prep Level or Below to Prep', category: 'Inversion', difficulty: 'Intermediate' },
-  { id: 'i7', skill: 'Non-Release Inversions Prep Level and Below to Extended', category: 'Inversion', difficulty: 'Advanced' },
-  { id: 'i8', skill: 'Released Inversions Prep Level or Below to Extended', category: 'Inversion', difficulty: 'Advanced' },
-  { id: 'i9', skill: 'Non-Release Twisting Inversions Prep Level and Below to Extended', category: 'Inversion', difficulty: 'Elite' },
-  { id: 'i10', skill: 'Released Inversions Prep Level or Below to Extended IBP', category: 'Inversion', difficulty: 'Elite' },
-  { id: 'i11', skill: 'Alternate Entries to Hand to Hand Stunts', category: 'Inversion', difficulty: 'Elite' },
-  { id: 'i12', skill: 'Released Inversions Prep Level or Below to Extended ABP', category: 'Inversion', difficulty: 'Super Elite' },
-  { id: 'i13', skill: 'Twisting Released Inversion to Extended', category: 'Inversion', difficulty: 'Super Elite' },
-  
-  { id: 'r1', skill: 'Release to Below Prep', category: 'Release', difficulty: 'Beginner' },
-  { id: 'r2', skill: 'Horizontal Releases to Below Prep', category: 'Release', difficulty: 'Beginner' },
+<!-- 🟣INVERSIONS🟣 -->
+  { id: 'i1', skill: 'Below Prep Level Inversions to Ground', category: 'Inversion', difficulty: 'Beginner'},
+  { id: 'i2', skill: 'Non-Release Inversions Prep Level or Below to Below Prep', category: 'Inversion', difficulty: 'Beginner' },
+  { id: 'i3', skill: 'Non-Release Twisting Inversions Prep Level or Below to Below Prep', category: 'Inversion', difficulty: 'Beginner' },
+  { id: 'i4', skill: 'Released Inversions Prep Level or Below to Below Prep', category: 'Inversion', difficulty: 'Beginner' },  
+  { id: 'i5', skill: 'Released Twisting Inversions Prep Level or Below to Below Prep', category: 'Inversion', difficulty: 'Beginner' },  
+  { id: 'i6', skill: 'Suspended Forward Roll Variations & Inversions', category: 'Inversion', difficulty: 'Intermediate' },
+  { id: 'i7', skill: 'Non-Release Inversions Prep Level or Below to Extended/IBP/ABP', category: 'Inversion', difficulty: 'Intermediate' },  
+  { id: 'i8', skill: 'Non-Release Twisting Inversions Prep Level or Below to Prep', category: 'Inversion', difficulty: 'Intermediate' },
+  { id: 'i9', skill: 'Released Inversions Prep Level or Below to Prep', category: 'Inversion', difficulty: 'Intermediate' },  
+  { id: 'i10', skill: 'Released Twisting Inversions Prep Level or Below to Prep', category: 'Inversion', difficulty: 'Intermediate' },  
+  { id: 'i11', skill: 'Non-Release Twisting Inversions Prep Level or Below to Extended/IBP/ABP', category: 'Inversion', difficulty: 'Advanced' },
+  { id: 'i12', skill: 'Released Inverted Low to High to Extended IBP/ABP', category: 'Inversion', difficulty: 'Advanced' },
+  { id: 'i13', skill: 'Released Inversions Prep Level or Below to Extended', category: 'Inversion', difficulty: 'Advanced' },  
+  { id: 'i14', skill: 'Released 1/4, 1/2, or 3/4 Twisting Inverted Low to High to Extended IBP/ABP', category: 'Inversion', difficulty: 'Elite' },
+  { id: 'i15', skill: 'Released Inversions Prep Level or Below to Extended IBP/ABP', category: 'Inversion', difficulty: 'Elite' },
+  { id: 'i16', skill: 'Released 1/4, 1/2, or 3/4 Twisting Inversions Prep Level or Below to Extended', category: 'Inversion', difficulty: 'Elite' },
+  { id: 'i17', skill: 'Released Full Twisting Inverted Low to High to Extended IBP/ABP', category: 'Inversion', difficulty: 'Super Elite' },  
+  { id: 'i18', skill: 'Released 1/4, 1/2, or 3/4 Twisting Inversions Prep Level or Below to Extended IBP/ABP', category: 'Inversion', difficulty: 'Super Elite' },
+  { id: 'i19', skill: 'Released Full Twisting Inversions Prep Level or Below to Extended/IBP/ABP', category: 'Inversion', difficulty: 'Super Elite' },
+<!-- 🟢RELEASES🟢 -->  
+  { id: 'r1', skill: 'Below Prep Release to Below Prep', category: 'Release', difficulty: 'Beginner' },
+  { id: 'r2', skill: 'Release to Below Prep', category: 'Release', difficulty: 'Beginner' },
   { id: 'r3', skill: 'Extended Release to Below Prep', category: 'Release', difficulty: 'Beginner' },
-  
+  { id: 'r4', skill: 'Horizontal Releases to Below Prep', category: 'Release', difficulty: 'Beginner' },  
+  { id: 'r5', skill: 'Twisting Releases to Below Prep', category: 'Release', difficulty: 'Beginner' },
+  { id: 'r6', skill: 'Prep Level Release to Prep', category: 'Release', difficulty: 'Intermediate' },
+  { id: 'r7', skill: 'Release to Prep', category: 'Release', difficulty: 'Intermediate' },
+  { id: 'r8', skill: 'Extended Release to Prep Level', category: 'Release', difficulty: 'Intermediate' },
+  { id: 'r9', skill: 'Horizontal Release to Prep', category: 'Release', difficulty: 'Intermediate' },
+  { id: 'r10', skill: 'Switch Up to Prep IBP/ABP', category: 'Release', difficulty: 'Intermediate' },
+  { id: 'r11', skill: 'Prep Level Low to Low (Tic Toc)', category: 'Release', difficulty: 'Intermediate' },
+  { id: 'r12', skill: 'Twisting Release to Prep Level', category: 'Release', difficulty: 'Intermediate' },
+  { id: 'r13', skill: 'Prep Level Release to Extended', category: 'Release', difficulty: 'Advanced' },
+  { id: 'r14', skill: 'Release to Extended', category: 'Release', difficulty: 'Advanced' },
+  { id: 'r15', skill: 'Extended Release to Prep Level IBP', category: 'Release', difficulty: 'Advanced' },
+  { id: 'r16', skill: 'Horizontal Release to Extended', category: 'Release', difficulty: 'Advanced' },
+  { id: 'r17', skill: 'Switch Up to Extended IBP/ABP', category: 'Release', difficulty: 'Advanced' },
+  { id: 'r18', skill: '1/4, 1/2, or 3/4 Twist Switch Up to Extended IBP', category: 'Release', difficulty: 'Advanced' },
+  { id: 'r19', skill: 'Low to High to IBP/ABP', category: 'Release', difficulty: 'Advanced' },
+  { id: 'r20', skill: '1/4, 1/2, or 3/4 Twist Low to High to IBP', category: 'Release', difficulty: 'Advanced' },
+  { id: 'r21', skill: '1/4, 1/2, or 3/4 Twist Release to Extended', category: 'Release', difficulty: 'Elite' },
+  { id: 'r22', skill: 'Horizontal Release to Extended IBP/ABP', category: 'Release', difficulty: 'Elite' },
+  { id: 'r23', skill: 'Full Twisting Switch Up to Extended IBP', category: 'Release', difficulty: 'Elite' },
+  { id: 'r24', skill: '1/4, 1/2, or 3/4 Twist Switch Up to Extended ABP', category: 'Release', difficulty: 'Elite' },
+  { id: 'r25', skill: '1/4, 1/2, or 3/4 Twist Low to High to ABP', category: 'Release', difficulty: 'Elite' },
+  { id: 'r26', skill: 'High to High (IBP to IBP/ABP)', category: 'Release', difficulty: 'Elite' },
+  { id: 'r27', skill: '1/4 Twist High to High to IBP/ABP', category: 'Release', difficulty: 'Elite' },
+  { id: 'r28', skill: 'Full Twisting Release to Extended', category: 'Release', difficulty: 'Super Elite' },
+  { id: 'r29', skill: 'Horizontal Twisting Release to Extended', category: 'Release', difficulty: 'Super Elite' },
+  { id: 'r30', skill: 'Full Twisting Switch Up to Extended ABP', category: 'Release', difficulty: 'Super Elite' },
+  { id: 'r31', skill: 'High to High (ABP to ABP)', category: 'Release', difficulty: 'Super Elite' },
+  { id: 'r32', skill: 'Full Twisting Low to High to IBP/ABP', category: 'Release', difficulty: 'Super Elite' },
+  { id: 'r33', skill: '1/2 or 3/4 Twist High to High to IBP/ABP', category: 'Release', difficulty: 'Super Elite' },
+  { id: 'r34', skill: 'Full Twisting High to High to IBP/ABP', category: 'Release', difficulty: 'Super Elite' },
+<!-- 🔴TWISTING🔴 -->  
   { id: 't1', skill: '1/4 or 1/2 Up to Prep Level', category: 'Twisting', difficulty: 'Beginner' },
   { id: 't2', skill: '1/4 Up to Extended', category: 'Twisting', difficulty: 'Beginner' },
   { id: 't3', skill: '1/4 or 1/2 Twisting Transitions', category: 'Twisting', difficulty: 'Beginner' },
-  
-  { id: 'c1', skill: 'Single Base at Prep Level', category: 'Coed', difficulty: 'Beginner' },
-  { id: 'c2', skill: 'Assisted Coed Skills to Prep', category: 'Coed', difficulty: 'Beginner' },
-  { id: 'c3', skill: 'Assisted Walk-In/Toss to Chair', category: 'Coed', difficulty: 'Beginner' },
-  
+  { id: 't4', skill: 'Full Up to Prep Level', category: 'Twisting', difficulty: 'Intermediate' },
+  { id: 't5', skill: '1/2 or 3/4 Up to Extended', category: 'Twisting', difficulty: 'Intermediate' },
+  { id: 't6', skill: '3/4 or Full Twisting Transitions', category: 'Twisting', difficulty: 'Intermediate' },
+  { id: 't7', skill: 'Full Up to Extended', category: 'Twisting', difficulty: 'Advanced' },
+  { id: 't8', skill: 'Hands Full Around to Extended', category: 'Twisting', difficulty: 'Advanced' },
+  { id: 't9', skill: '1.5 Up to Extended', category: 'Twisting', difficulty: 'Elite' },
+  { id: 't10', skill: 'Hands 1.5 Around to Extended', category: 'Twisting', difficulty: 'Elite' },
+  { id: 't11', skill: 'Hands Full Around to Extended IBP/ABP', category: 'Twisting', difficulty: 'Elite' },
+  { id: 't12', skill: 'High to High Full Around (Ext to Ext)', category: 'Twisting', difficulty: 'Elite' },
+  { id: 't13', skill: 'Double Up to Extended', category: 'Twisting', difficulty: 'Super Elite' },
+  { id: 't14', skill: 'Hands Double Around to Extended', category: 'Twisting', difficulty: 'Super Elite' },
+  { id: 't15', skill: 'High to High Full Around to IBP/ABP (Ext to Single Leg)', category: 'Twisting', difficulty: 'Super Elite' },
+  { id: 't16', skill: 'High to High Full Around to IBP/ABP (Single Leg to Single Leg)', category: 'Twisting', difficulty: 'Super Elite' },
+  { id: 't17', skill: 'High to High 1.5 Around', category: 'Twisting', difficulty: 'Super Elite' },
+<!-- 🔵SINGLE BASE🔵 -->  
+  { id: 'c1', skill: 'Prep Level Skills', category: 'Coed', difficulty: 'Beginner' },
+  { id: 'c2', skill: 'Walk-In/Toss to Chair', category: 'Coed', difficulty: 'Beginner' },
+  { id: 'c3', skill: 'Walk-In/Toss to Hands', category: 'Coed', difficulty: 'Beginner' },
+  { id: 'c4', skill: 'Extension or Cupie', category: 'Coed', difficulty: 'Intermediate' },
+  { id: 'c5', skill: '1/4, 1/2, or 3/4 Twist to Prep Level', category: 'Coed', difficulty: 'Intermediate' },
+  { id: 'c6', skill: 'Toss Hands', category: 'Coed', difficulty: 'Intermediate' },
+  { id: 'c7', skill: 'Walk-In Hands, Press to Extension', category: 'Coed', difficulty: 'Intermediate' },
+  { id: 'c8', skill: 'Toss Hands, Press to Extension', category: 'Coed', difficulty: 'Intermediate' },
+  { id: 'c9', skill: 'Switch Up to Extended', category: 'Coed', difficulty: 'Intermediate' },
+  { id: 'c10', skill: 'Extended Single Leg', category: 'Coed', difficulty: 'Advanced' },
+  { id: 'c11', skill: 'Full Up to Prep Level', category: 'Coed', difficulty: 'Advanced' },
+  { id: 'c12', skill: 'Full Twisting Skills to Extended', category: 'Coed', difficulty: 'Advanced' },
+  { id: 'c13', skill: 'Toss Hands, Press to Extended Single Leg', category: 'Coed', difficulty: 'Advanced' },
+  { id: 'c14', skill: 'Walk-In to Extended Single Leg', category: 'Coed', difficulty: 'Advanced' },
+  { id: 'c15', skill: 'Toss Extension', category: 'Coed', difficulty: 'Advanced' },
+  { id: 'c16', skill: 'Low to High to Extended', category: 'Coed', difficulty: 'Advanced' },
+  { id: 'c17', skill: 'Releases to Extended Single Leg', category: 'Coed', difficulty: 'Elite' },
+  { id: 'c18', skill: '1/4 Twist Release to Extended', category: 'Coed', difficulty: 'Elite' },
+  { id: 'c19', skill: 'Released Inversion to Prep Level', category: 'Coed', difficulty: 'Elite' },
+  { id: 'c20', skill: 'Toss Single Arm Extended', category: 'Coed', difficulty: 'Elite' },
+  { id: 'c21', skill: 'Walk-In to Extended Single Arm', category: 'Coed', difficulty: 'Elite' },
+  { id: 'c22', skill: 'Toss Extended Single Leg', category: 'Coed', difficulty: 'Elite' },
+  { id: 'c23', skill: 'High to High to Extended', category: 'Coed', difficulty: 'Elite' },
+  { id: 'c24', skill: 'Toss Full Up yo Prep Level', category: 'Coed', difficulty: 'Elite' },
+  { id: 'c25', skill: '1/2, 3/4, or Full Twisting Releases to Extended', category: 'Coed', difficulty: 'Super Elite' },
+  { id: 'c26', skill: 'Non-Release Inversions to Extended', category: 'Coed', difficulty: 'Super Elite' },
+  { id: 'c27', skill: 'Released Twisting Inversion to Extended', category: 'Coed', difficulty: 'Super Elite' },
+  { id: 'c28', skill: 'Twisting Release from Hands to Extended', category: 'Coed', difficulty: 'Super Elite' },
+  { id: 'c29', skill: 'Toss Extended Single Arm', category: 'Coed', difficulty: 'Super Elite' },
+  { id: 'c30', skill: 'Released Inversion to Extended', category: 'Coed', difficulty: 'Super Elite' },
+  { id: 'c31', skill: 'Toss Full Up to Extended', category: 'Coed', difficulty: 'Super Elite' },
+<!-- 🟠OTHER🟠 -->  
   { id: 'o1', skill: 'Prep Level and Below Stunts Not Previously Categorized', category: 'Other', difficulty: 'Beginner' },
   { id: 'o2', skill: 'Extended Stunts Not Previously Categorized', category: 'Other', difficulty: 'Intermediate' },
-
+<!-- 🟡TOSS🟡 -->
   { id: 'o3', skill: 'Straight Ride or Pretty Girl Tosses', category: 'Toss', difficulty: 'Beginner' },
   { id: 'o4', skill: 'Single Skill Tosses', category: 'Toss', difficulty: 'Intermediate' },
   { id: 'o5', skill: 'Multi-Skill Tosses', category: 'Toss', difficulty: 'Advanced' },
   { id: 'o6', skill: 'Single-Skill Tosses with Full Twist', category: 'Toss', difficulty: 'Elite' }, 
-  { id: 'o7', skill: 'Multi-Skill Tosses with Full Twist', category: 'Toss', difficulty: 'Super Elite' },
-  
-  { id: 'h1', skill: 'TEST', category: 'Inversion', difficulty: 'Advanced' },
-  { id: 'h2', skill: 'TEST', category: 'Release', difficulty: 'Elite' },
-  { id: 'h3', skill: 'TEST', category: 'Twisting', difficulty: 'Super Elite' }
+  { id: 'o7', skill: 'Multi-Skill Tosses with Full Twist', category: 'Toss', difficulty: 'Super Elite' }
 ];
 
 const PyramidRegions = [
+<!-- 🟣NON-RELEASE TRANSITIONS🟣 -->
   { id: 'n1', skill: 'Braced Non-Released Transitions', category: 'Inversion', difficulty: 'Beginner' },
   { id: 'n2', skill: 'Inverted Stunts to Prep Level and Below', category: 'Inversion', difficulty: 'Beginner' },
   { id: 'n3', skill: 'Intermediate Twisting Stunt Variations', category: 'Inversion', difficulty: 'Beginner' },
   { id: 'n4', skill: 'Unbraced Non-Released Transitions', category: 'Inversion', difficulty: 'Intermediate' },
-
+  { id: 'n5', skill: 'Inverted Stunts to Extended (2)', category: 'Inversion', difficulty: 'Intermediate' },
+  { id: 'n6', skill: 'Advanced Twisting Stunts', category: 'Inversion', difficulty: 'Intermediate' },
+  { id: 'n7', skill: 'Intermediate Single Base Stunts', category: 'Inversion', difficulty: 'Intermediate' },
+  { id: 'n8', skill: 'Inverted Stunts to Extended (1)', category: 'Inversion', difficulty: 'Advanced' },
+  { id: 'n9', skill: 'Twisting Inverted Stunts to Extended', category: 'Inversion', difficulty: 'Advanced' },
+  { id: 'n10', skill: 'Elite Twisting Stunts', category: 'Inversion', difficulty: 'Advanced' },
+  { id: 'n11', skill: 'Advanced Single Base Stunts', category: 'Inversion', difficulty: 'Advanced' },
+  { id: 'n12', skill: 'Twisting Inverted Stunts to Extended (1)', category: 'Inversion', difficulty: 'Elite' },
+  { id: 'n13', skill: 'Super Elite Twisting Stunts', category: 'Inversion', difficulty: 'Elite' },
+  { id: 'n14', skill: 'Elite Single Base Stunts', category: 'Inversion', difficulty: 'Elite' },
+  { id: 'n15', skill: 'Super Elite Single Base Stunts', category: 'Inversion', difficulty: 'Super Elite' },
+<!-- 🟢PYRAMID RELEASES🟢 -->	
   { id: 'pr1', skill: 'Braced Release to Prep or Below (1 or 2)', category: 'Release', difficulty: 'Beginner' },
   { id: 'pr2', skill: 'Braced Release to Extended (2)', category: 'Release', difficulty: 'Beginner' },
   { id: 'pr3', skill: 'Braced Release to Extended (1)', category: 'Release', difficulty: 'Intermediate' },
- 
-  { id: 'b1', skill: 'Rolling Transition to Prep Level or Below', category: 'Twisting', difficulty: 'Advanced' },
-  { id: 'b2', skill: 'Flipping Transition Landing Below Prep Level (1 or 2)', category: 'Twisting', difficulty: 'Elite' },
-  { id: 'b3', skill: '1/4 Twisting Flipping Transition Landing at Prep or Below (1 or 2)', category: 'Twisting', difficulty: 'Super Elite' },
+  { id: 'pr4', skill: 'Braced Inverted Release to Prep or Below (1 or 2)', category: 'Release', difficulty: 'Intermediate' },
+  { id: 'pr5', skill: 'Braced Twisting Release to Prep or Below (1 or 2)', category: 'Release', difficulty: 'Intermediate' },
+  { id: 'pr6', skill: 'Unbraced Release to Prep or Below', category: 'Release', difficulty: 'Intermediate' },
+  { id: 'pr7', skill: 'Braced Inverted Release to Extended (2)', category: 'Release', difficulty: 'Advanced' },
+  { id: 'pr8', skill: 'Braced 1/4, 1/2, or 3/4 Twisting Release to Extended (1 or 2)', category: 'Release', difficulty: 'Advanced' },
+  { id: 'pr9', skill: 'Unbraced Release to Extended', category: 'Release', difficulty: 'Advanced' },
+  { id: 'pr10', skill: 'Braced Inverted Release to Extended (1)', category: 'Release', difficulty: 'Elite' },
+  { id: 'pr11', skill: 'Braced Full Twisting Release to Extended (1 or 2)', category: 'Release', difficulty: 'Elite' },
+  { id: 'pr12', skill: 'Unbraced 1/4, 1/2, or 3/4 Twisting Release to Extended', category: 'Release', difficulty: 'Elite' },
+  { id: 'pr13', skill: 'Unbraced Inverted Release to Extended', category: 'Release', difficulty: 'Super Elite' },
+  { id: 'pr14', skill: 'Unbraced Full Twisting Release to Extended', category: 'Release', difficulty: 'Super Elite' },
+<!-- 🔴BRACED ROLL/FLIP🔴 --> 
+  { id: 'b1', skill: 'Rolling Transition to Prep Level or Below', category: 'Twisting', difficulty: 'Beginner' },
+  { id: 'b2', skill: 'Flipping Transition Landing Below Prep Level (1 or 2)', category: 'Twisting', difficulty: 'Beginner' },
+  { id: 'b3', skill: '1/4 Twisting Flipping Transition Landing at Prep or Below (1 or 2)', category: 'Twisting', difficulty: 'Beginner' },
+  { id: 'b4', skill: 'Rolling Transition to Extended', category: 'Twisting', difficulty: 'Intermediate' },
+  { id: 'b5', skill: 'Flipping Transition Landing at Prep Level (2)', category: 'Twisting', difficulty: 'Intermediate' },
+  { id: 'b6', skill: '1/2 or 3/4 Twisting Flipping Transition Landing at Prep or Below (1 or 2)', category: 'Twisting', difficulty: 'Intermediate' },
+  { id: 'b7', skill: 'Flipping Transition Landing at Prep Level (1)', category: 'Twisting', difficulty: 'Advanced' },
+  { id: 'b8', skill: 'Full Twisting Flipping Transition Landing at Prep or Below (1 or 2)', category: 'Twisting', difficulty: 'Advanced' },
+  { id: 'b9', skill: 'Flipping Transition Landing at Extended (2)', category: 'Twisting', difficulty: 'Elite' },
+  { id: 'b10', skill: 'Twisting Flipping Transition Landing at Extended (2)', category: 'Twisting', difficulty: 'Elite' },
+  { id: 'b11', skill: 'Flipping Transition Landing at Extended (1)', category: 'Twisting', difficulty: 'Super Elite' },
+  { id: 'b12', skill: 'Twisting Flipping Transition Landing at Extended (1)', category: 'Twisting', difficulty: 'Super Elite' }
 ];
 
 const wrapper = document.querySelector('.wrapper');
@@ -496,25 +744,21 @@ const pyramidCountsContainer = document.getElementById('PyramidCounts');
   (function() {
   
     const fallbackRegions = [
-      { id: 'i1', skill: 'Connected Inversions - Prep Level and Below to Below Prep', category: 'Inversion', difficulty: 'Beginner'},
-      { id: 'i2', skill: 'Below Prep Level Inversions to Ground', category: 'Inversion', difficulty: 'Beginner' },
-      { id: 'i3', skill: 'Released Inversion Prep Level or Below to Below Prep', category: 'Inversion', difficulty: 'Beginner' },
-      { id: 'i4', skill: 'Connected Inversions - Prep Level and Below to Prep', category: 'Inversion', difficulty: 'Intermediate' },
-      { id: 'r1', skill: 'Release to Below Prep', category: 'Release', difficulty: 'Beginner' },
-      { id: 'r2', skill: 'Horizontal Releases to Below Prep', category: 'Release', difficulty: 'Beginner' },
-      { id: 'r3', skill: 'Extended Release to Below Prep', category: 'Release', difficulty: 'Beginner' },
-      { id: 't1', skill: '1/4 or 1/2 Up to Prep Level', category: 'Twisting', difficulty: 'Beginner' },
-      { id: 't2', skill: '1/4 Up to Extended', category: 'Twisting', difficulty: 'Beginner' },
-      { id: 't3', skill: '1/4 or 1/2 Twisting Transitions', category: 'Twisting', difficulty: 'Beginner' },
-      { id: 'c1', skill: 'Single Base at Prep Level', category: 'Coed', difficulty: 'Beginner' },
-      { id: 'c2', skill: 'Assisted Coed Skills to Prep', category: 'Coed', difficulty: 'Beginner' },
-      { id: 'c3', skill: 'Assisted Walk-In/Toss to Chair', category: 'Coed', difficulty: 'Beginner' },
-      { id: 'o1', skill: 'Prep Level and Below Stunts Not Previously Categorized', category: 'Other', difficulty: 'Beginner' },
-      { id: 'o2', skill: 'Extended Stunts Not Previously Categorized', category: 'Other', difficulty: 'Intermediate' }, 
-	  { id: 'o3', skill: 'Straight Ride or Pretty Girl Tosses', category: 'Toss', difficulty: 'Beginner' },
-      { id: 'h1', skill: 'TEST', category: 'Inversion', difficulty: 'Advanced' },
-      { id: 'h2', skill: 'TEST', category: 'Release', difficulty: 'Elite' },
-      { id: 'h3', skill: 'TEST', category: 'Twisting', difficulty: 'Super Elite' }
+  { id: 'i1', skill: 'Below Prep Level Inversions to Ground', category: 'Inversion', difficulty: 'Beginner'},
+  { id: 'i2', skill: 'Non-Release Inversions Prep Level or Below to Below Prep', category: 'Inversion', difficulty: 'Beginner' },
+  { id: 'i3', skill: 'Non-Release Twisting Inversions Prep Level or Below to Below Prep', category: 'Inversion', difficulty: 'Beginner' },
+  { id: 'r1', skill: 'Below Prep Release to Below Prep', category: 'Release', difficulty: 'Beginner' },
+  { id: 'r2', skill: 'Release to Below Prep', category: 'Release', difficulty: 'Beginner' },
+  { id: 'r3', skill: 'Extended Release to Below Prep', category: 'Release', difficulty: 'Beginner' },
+  { id: 't1', skill: '1/4 or 1/2 Up to Prep Level', category: 'Twisting', difficulty: 'Beginner' },
+  { id: 't2', skill: '1/4 Up to Extended', category: 'Twisting', difficulty: 'Beginner' },
+  { id: 't3', skill: '1/4 or 1/2 Twisting Transitions', category: 'Twisting', difficulty: 'Beginner' },
+  { id: 'c1', skill: 'Prep Level Skills', category: 'Coed', difficulty: 'Beginner' },
+  { id: 'c2', skill: 'Walk-In/Toss to Chair', category: 'Coed', difficulty: 'Beginner' },
+  { id: 'c3', skill: 'Walk-In/Toss to Hands', category: 'Coed', difficulty: 'Beginner' },  
+  { id: 'o1', skill: 'Prep Level and Below Stunts Not Previously Categorized', category: 'Other', difficulty: 'Beginner' },
+  { id: 'o2', skill: 'Extended Stunts Not Previously Categorized', category: 'Other', difficulty: 'Intermediate' },
+  { id: 'o3', skill: 'Straight Ride or Pretty Girl Tosses', category: 'Toss', difficulty: 'Beginner' }
     ];
 
   // If StuntRegions[] exists, use it. Otherwise fallback.
@@ -620,18 +864,15 @@ let draggedRow = null;
 (function () {
 
   const fallbackPyramidRegions = [
-    { id: "n1",  skill: "Braced non-released transitions", category: "Non-Released Transition", difficulty: "Beginner" },
-    { id: "n2",  skill: "Inverted stunts to prep level and below", category: "Non-Released Transition", difficulty: "Beginner" },
-    { id: "n3",  skill: "Intermediate twisting stunt variations", category: "Non-Released Transition", difficulty: "Beginner" },
-    { id: "n4",  skill: "Unbraced non-released transitions", category: "Non-Released Transition", difficulty: "Intermediate" },
-
-    { id: "pr1", skill: "Braced release to prep or below", category: "Released Transition", difficulty: "Beginner" },
-    { id: "pr2", skill: "Braced release to extended (2)", category: "Released Transition", difficulty: "Beginner" },
-    { id: "pr3", skill: "Braced release to extended (1)", category: "Released Transition", difficulty: "Intermediate" },
-
-    { id: 'b1', skill: 'Rolling Transition to Prep Level or Below', category: 'Twisting', difficulty: 'Advanced' },
-    { id: 'b2', skill: 'Flipping Transition Landing Below Prep Level (1 or 2)', category: 'Twisting', difficulty: 'Elite' },
-    { id: 'b3', skill: '1/4 Twisting Flipping Transition Landing at Prep or Below (1 or 2)', category: 'Twisting', difficulty: 'Super Elite' }
+  { id: 'n1', skill: 'Braced Non-Released Transitions', category: 'Inversion', difficulty: 'Beginner' },
+  { id: 'n2', skill: 'Inverted Stunts to Prep Level and Below', category: 'Inversion', difficulty: 'Beginner' },
+  { id: 'n3', skill: 'Intermediate Twisting Stunt Variations', category: 'Inversion', difficulty: 'Beginner' },
+  { id: 'pr1', skill: 'Braced Release to Prep or Below (1 or 2)', category: 'Release', difficulty: 'Beginner' },
+  { id: 'pr2', skill: 'Braced Release to Extended (2)', category: 'Release', difficulty: 'Beginner' },
+  { id: 'pr3', skill: 'Braced Release to Extended (1)', category: 'Release', difficulty: 'Intermediate' },
+  { id: 'b1', skill: 'Rolling Transition to Prep Level or Below', category: 'Twisting', difficulty: 'Beginner' },
+  { id: 'b2', skill: 'Flipping Transition Landing Below Prep Level (1 or 2)', category: 'Twisting', difficulty: 'Beginner' },
+  { id: 'b3', skill: '1/4 Twisting Flipping Transition Landing at Prep or Below (1 or 2)', category: 'Twisting', difficulty: 'Beginner' }
   ];
 
   // If PyramidRegions[] exists, use it. Otherwise fallback.
