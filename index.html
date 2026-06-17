@@ -1117,9 +1117,9 @@ function runChecker(silent = false) {
   outputText += `<span class="credited-star">${star}</span>${count} — ${difficulty} — ${skill}`;
 
   if (row.classList.contains('additional-toss')) {
-    outputText += ' (Additional Toss)';
+    outputText += ' - {Additional Toss}';
   } else if (row.classList.contains('non-majority')) {
-    outputText += ' (Non Majority)';
+    outputText += ' - {Non Majority}';
   }
 
   outputText += '\n';
@@ -1134,7 +1134,7 @@ function runChecker(silent = false) {
 
   // 🔶Step 9: Output results
   outputText += `<strong>\nRequired Number of Groups for Majority:</strong> ${majorityStunt}`;
-  outputText += `<strong>\nStunt Difficulty Range:</strong> ${overallStuntDifficulty || 'Selected skills do not meet rubric requirements for majority'}`;
+  outputText += `<strong>\nStunt Difficulty Range:</strong> ${overallStuntDifficulty || 'Selected skills do not meet rubric requirements for majority. Difficulty range assigned to Beginner.'}`;
 
   document.getElementById('output').innerHTML = outputText;
 
@@ -1149,9 +1149,9 @@ function runChecker(silent = false) {
 	StuntSkillListOutput += `<span class="credited-star">${star}</span>${count} — ${difficulty} — ${skill}`;
 
     if (row.classList.contains('additional-toss')) {
-      StuntSkillListOutput += ' (Additional Toss)';
+      StuntSkillListOutput += ' - {Additional Toss}';
     } else if (row.classList.contains('non-majority')) {
-      StuntSkillListOutput += ' (Non Majority)';
+      StuntSkillListOutput += ' - {Non Majority}';
     }
 
     StuntSkillListOutput += '\n';
@@ -1261,7 +1261,7 @@ rows.forEach(row => {
   outputText += `<span class="credited-star">${star}</span>${count} — ${difficulty} — ${skill}`;
 
   if (row.classList.contains('non-majority')) {
-    outputText += ' (Non Majority)';
+    outputText += ' - {Non Majority}';
   }
 
   outputText += '\n';
@@ -1269,7 +1269,7 @@ rows.forEach(row => {
 
   // 🔷Step 7: Output results
   outputText += `<strong>\nRequired Number of Skill Flyers for Majority:</strong>   ${majorityPyramid}`;
-  outputText += `<strong>\nPyramid Difficulty Range:</strong>   ${overallPyramidDifficulty || 'Selected skills do not meet rubric requirements for majority'}`;
+  outputText += `<strong>\nPyramid Difficulty Range:</strong>   ${overallPyramidDifficulty || 'Selected skills do not meet rubric requirements for majority. Difficulty range assigned to Beginner.'}`;
 
   document.getElementById('outputp').innerHTML = outputText;
 
@@ -1284,7 +1284,7 @@ rows.forEach(row => {
 	PyramidSkillListOutput += `<span class="credited-star">${star}</span>${count} — ${difficulty} — ${skill}`;
 
     if (row.classList.contains('non-majority')) {
-      PyramidSkillListOutput += ' (Non Majority)';
+      PyramidSkillListOutput += ' - {Non Majority}';
     }
 
     PyramidSkillListOutput += '\n';
