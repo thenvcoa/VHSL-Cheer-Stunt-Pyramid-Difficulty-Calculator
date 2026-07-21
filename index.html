@@ -70,6 +70,10 @@ button:hover { background: var(--vhsl-blue-dark); transform: translateY(-1px); b
 #previewBtn { background: #4b5563 !important; }
 #previewBtn:hover { background: #374151 !important; }
 #saveBtn { padding: 16px 30px !important; font-size: 20px !important; border-radius: 16px !important; }
+.disclaimer-note {margin-top: 12px; padding: 12px 16px; max-width: 900px; background: rgba(192,32,37,0.06); border: 1px solid rgba(192,32,37,0.25); border-left: 4px solid var(--vhsl-red);
+  border-radius: 10px; color: #7a1519; font-size: 13px; font-weight: 600; line-height: 1.5;}
+@media (prefers-color-scheme: dark) {
+  .disclaimer-note {background: rgba(239,68,68,0.10); border-color: rgba(239,68,68,0.35); color: #fca5a5;  }}
 </style>
 
 
@@ -427,6 +431,9 @@ tbody tr:hover { background: rgba(47,49,125,0.035); }
 	</div>
 
 	<div id="output"></div>
+	<div class="disclaimer-note">
+		⚠ This calculated difficulty range only applies when all listed skills are performed and successfully completed as intended. If a skill is not performed as described or not executed correctly, the actual difficulty range may differ from what is shown above.
+	</div>
 </div>
 
 <hr>
@@ -539,6 +546,9 @@ tbody tr:hover { background: rgba(47,49,125,0.035); }
 	</div>
 
 	<div id="outputp"></div>
+	<div class="disclaimer-note">
+		⚠ This calculated difficulty range only applies when all listed skills are performed and successfully completed as intended. If a skill is not performed as described or not executed correctly, the actual difficulty range may differ from what is shown above.
+	</div>
   </div>
 
   <div style="text-align: center; margin-top: 30px;">
